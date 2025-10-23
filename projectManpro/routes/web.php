@@ -7,7 +7,7 @@ use App\Http\Controllers\MenuController;
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
 
-Route::get('/Menu', [MenuController::class, 'index'])->name('home');
+// Route::get('/enu', [MenuController::class, 'index'])->name('home');
 
-// Route::resource('Menu', MenuController::class);
+Route::resource('menu', MenuController::class);
 
