@@ -7,7 +7,6 @@
     <section
         class="relative bg-cover bg-center text-white text-center py-28"
         style="background-image: url('{{ asset('images/bg-hero.jpg') }}');">
-        <div class="absolute inset-0 bg-[#5C0000]/80"></div>
 
         <div class="relative z-10">
             <img src="{{ asset('images/logo.png') }}" alt="Logo" class="mx-auto w-40 mb-6">
@@ -41,7 +40,7 @@
     </section>
 
     {{-- Top Menu Section --}}
-    <section id="menu" class="bg-[#5C0000] text-white py-20 px-6 text-center">
+    <section id="menu" class="text-white py-20 text-center bg-cover bg-center" style="background-image: url('{{ asset('images/bg-hero.jpg') }}');">
         <h2 class="text-3xl font-bold mb-12 flex items-center justify-center gap-4">
             <span class="w-20 h-[1px] bg-white"></span>
             Top Menu
@@ -62,7 +61,7 @@
 
             {{-- Menu Card 2 --}}
             <div class="bg-white text-[#1E1E2F] rounded-2xl shadow-lg overflow-hidden hover:scale-[1.02] transition-transform duration-300">
-                <img src="{{ asset('images/menu2.jpg') }}" alt="Ayam Geprek Kecil" class="w-full h-60 object-cover">
+                <img src="{{ asset('images/menu1.jpg') }}" alt="Ayam Geprek Kecil" class="w-full h-60 object-cover">
                 <div class="bg-[#5C0000] text-white text-lg font-semibold py-2">Top Menu 2</div>
                 <div class="p-5">
                     <h3 class="text-xl font-bold text-[#5C0000] mb-2">Ayam Geprek Kecil</h3>
