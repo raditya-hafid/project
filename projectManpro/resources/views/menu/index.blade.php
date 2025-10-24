@@ -58,7 +58,14 @@
                 @forelse ($menus as $menu)
                     @if ($menu->promo == 1)
                         <div class="bg-white rounded-lg shadow-md overflow-hidden">
-                            <div class="w-full h-48 bg-gray-100"></div>
+                            @if ($menu->gambar)
+                                <img src="{{ asset('storage/' . $menu->gambar) }}" alt="{{ $menu->name }}"
+                                    class="w-full h-48 object-cover">
+                            @else
+                                <div class="w-full h-48 bg-gray-100 flex items-center justify-center text-gray-400">
+                                    <span>Tidak ada gambar</span>
+                                </div>
+                            @endif
                             <div class="p-4">
                                 <h4 class="font-bold text-lg">{{ $menu->name }}</h4>
                                 <p class="text-gray-600">Rp{{ number_format($menu->price, 2) }}</p>
@@ -99,24 +106,24 @@
 
 
 
-<script>
-    let lastScrollTop = 0;
-    const navbar = document.getElementById('navbar');
+    <script>
+        let lastScrollTop = 0;
+        const navbar = document.getElementById('navbar');
 
-    window.addEventListener('scroll', function() {
-        const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+        window.addEventListener('scroll', function() {
+            const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
 
-        if (currentScroll > lastScrollTop) {
-            // Scroll ke bawah → sembunyikan navbar
-            navbar.style.transform = 'translateY(-100%)';
-        } else {
-            // Scroll ke atas → tampilkan navbar
-            navbar.style.transform = 'translateY(0)';
-        }
+            if (currentScroll > lastScrollTop) {
+                // Scroll ke bawah → sembunyikan navbar
+                navbar.style.transform = 'translateY(-100%)';
+            } else {
+                // Scroll ke atas → tampilkan navbar
+                navbar.style.transform = 'translateY(0)';
+            }
 
-        lastScrollTop = currentScroll <= 0 ? 0 : currentScroll; // Hindari nilai negatif
-    });
-</script>
+            lastScrollTop = currentScroll <= 0 ? 0 : currentScroll; // Hindari nilai negatif
+        });
+    </script>
 </body>
 
 </html>
