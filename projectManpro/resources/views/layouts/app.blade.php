@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,33 +9,28 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.js"></script>
 </head>
+
+{{-- ===== Navbar ===== --}}
+<div id="navbar" class="fixed top-0 left-0 w-full z-50 bg-[#FF7B00] shadow-md transition-transform duration-300">
+    <div class="container mx-auto flex justify-between items-center p-2 px-4 md:px-15">
+        <a href="/">
+            <img src="{{ asset('images/logo.png') }}" alt="" class="h-15 w-auto">
+        </a>
+        <nav>
+            <a href="#" class="text-white mx-2 hover:text-[#45000F] transition">Home</a>
+            <a href="/product" class="text-white mx-2 hover:text-[#45000F] transition">Menu</a>
+            <a href="#" class="text-white mx-2 hover:text-[#45000F] transition">About</a>
+            <a href="#" class="text-white mx-2 hover:text-[#45000F] transition">Outlet</a>
+        </nav>
+    </div>
+</div>
 
 <body class="flex flex-col min-h-screen m-0 p-0">
 
-    {{-- ===== Navbar ===== --}}
-    <header class="bg-[#FF7B00] text-white sticky top-0 z-50 shadow-lg">
-        <div class="max-w-7xl mx-auto flex items-center justify-between px-6 py-4">
-            <div class="flex items-center gap-3">
-                <img src="{{ asset('images/logo.png') }}" alt="Logo" class="w-12 h-12 object-contain">
-            </div>
 
-            <nav class="hidden md:flex gap-8 text-lg font-medium">
-                <a href="/" class="hover:text-[#5C0000] transition">Home</a>
-                <a href="#menu" class="hover:text-[#5C0000] transition">Menu</a>
-                <a href="#about" class="hover:text-[#5C0000] transition">About</a>
-                <a href="#outlet" class="hover:text-[#5C0000] transition">Outlet</a>
-            </nav>
-
-            <button class="md:hidden focus:outline-none">
-                <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7" fill="none" viewBox="0 0 24 24"
-                    stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M4 6h16M4 12h16M4 18h16" />
-                </svg>
-            </button>
-        </div>
-    </header>
 
     {{-- ===== Main Content ===== --}}
     <main class="">
@@ -60,10 +56,14 @@
             <hr class="border-white/30 mb-6">
 
             <div class="flex justify-center gap-5 mb-6">
-                <a href="#"><img src="{{ asset('images/icon-instagram.png') }}" alt="Instagram" class="w-6 h-6 hover:opacity-80 transition"></a>
-                <a href="#"><img src="{{ asset('images/icon-facebook.png') }}" alt="Facebook" class="w-6 h-6 hover:opacity-80 transition"></a>
-                <a href="#"><img src="{{ asset('images/icon-twitter.png') }}" alt="Twitter" class="w-6 h-6 hover:opacity-80 transition"></a>
-                <a href="#"><img src="{{ asset('images/icon-whatsapp.png') }}" alt="WhatsApp" class="w-6 h-6 hover:opacity-80 transition"></a>
+                <a href="#"><img src="{{ asset('images/icon-instagram.png') }}" alt="Instagram"
+                        class="w-6 h-6 hover:opacity-80 transition"></a>
+                <a href="#"><img src="{{ asset('images/icon-facebook.png') }}" alt="Facebook"
+                        class="w-6 h-6 hover:opacity-80 transition"></a>
+                <a href="#"><img src="{{ asset('images/icon-twitter.png') }}" alt="Twitter"
+                        class="w-6 h-6 hover:opacity-80 transition"></a>
+                <a href="#"><img src="{{ asset('images/icon-whatsapp.png') }}" alt="WhatsApp"
+                        class="w-6 h-6 hover:opacity-80 transition"></a>
             </div>
 
             <div class="text-xs md:text-sm text-white/90 mb-3">
@@ -79,6 +79,24 @@
         </div>
     </footer>
 
+    <script>
+        let lastScrollTop = 0;
+        const navbar = document.getElementById('navbar');
+
+        window.addEventListener('scroll', function() {
+            const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+
+            if (currentScroll > lastScrollTop) {
+                // Scroll ke bawah → sembunyikan navbar
+                navbar.style.transform = 'translateY(-100%)';
+            } else {
+                // Scroll ke atas → tampilkan navbar
+                navbar.style.transform = 'translateY(0)';
+            }
+
+            lastScrollTop = currentScroll <= 0 ? 0 : currentScroll; // Hindari nilai negatif
+        });
+    </script>
 </body>
 
 

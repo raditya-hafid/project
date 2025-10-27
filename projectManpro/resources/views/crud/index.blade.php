@@ -1,56 +1,76 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('layouts.app')
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
-</head>
+@section('title', 'Dashboard - Geprek GT')
 
-<body>
-    <a href="{{ route('menu.create') }}">
-        <p>Create</p>
-    </a>
-    <div class="mt-8">
-        <h3 class="text-2xl font-bold text-[#FF7B00]">ALL MENU</h3>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-4">
-            @forelse ($menus as $menu)
-                <div class="bg-white rounded-lg shadow-md overflow-hidden">
-                    @if ($menu->gambar)
-                        <img src="{{ asset('storage/' . $menu->gambar) }}" alt="{{ $menu->name }}"
-                            class="w-full h-48 object-cover">
-                    @else
-                        <div class="w-full h-48 bg-gray-100 flex items-center justify-center text-gray-400">
-                            <span>Tidak ada gambar</span>
-                        </div>
-                    @endif
-                    <div class="p-4">
-                        <h4 class="font-bold text-lg">{{ $menu->name }}</h4>
-                        <p class="text-gray-600">Rp{{ number_format($menu->price, 2) }}</p>
-                        <div class="flex items-center mt-2">
-                            <a href="/menu/{{ $menu->id }}}/edit"
-                                style="display: inline-block; margin-top: 1rem; margin-left: 1rem;">Edit Postingan</a>
-                            <form action="/menu/{{ $menu->id }}" method="POST"
-                                style="display: inline-block; margin-left: 1rem;">
-                                @csrf
-                                @method('delete')
-                                <button type="submit"
-                                    style="background-color: #dc3545; color: white; border: none; padding: 0.5rem 1rem; border-radius: 4px; cursor: pointer;"
-                                    onclick="return confirm('Hapus Postingan Ini?')">
-                                    Hapus
-                                </button>
-                            </form>
-                            {{-- <span class="text-yellow-400">★★★★☆</span> --}}
+@section('content')
+    {{-- ===== Hero Section ===== --}}
+    <section class="bg-cover bg-center text-center py-24 mt-19 relative"
+        style="background-image: url('{{ asset('images/bg-hero.jpg') }}');">
+        <div class="absolute inset-0 bg-[#45000F]"></div>
+
+        <div class="relative z-10 max-w-3xl mx-auto">
+            <div
+                class="bg-white bg-opacity-20 border-2 border-dashed border-white rounded-xl p-10 backdrop-blur-sm shadow-lg">
+                <h2 class="text-3xl md:text-4xl font-bold mb-6 text-white">Ready to share culinary creation?</h2>
+                <a href="{{ route('menu.create') }}"
+                    class="bg-[#FF7B00] text-white font-semibold px-6 py-3 rounded-lg shadow hover:bg-[#E56C00] transition">
+                    Upload/Post New Food
+                </a>
+            </div>
+        </div>
+    </section>
+
+    {{-- ===== Latest Dishes ===== --}}
+    <section class="py-16 bg-[#45000F] text-white">
+        <div class="max-w-6xl mx-auto px-6">
+            <h3 class="text-2xl font-bold mb-8">Your Latest Dishes</h3>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-8">
+                @forelse ($menus as $menu)
+                    <div class="bg-white text-gray-800 rounded-xl shadow-lg overflow-hidden">
+                        @if ($menu->gambar)
+                            <img src="{{ asset('storage/' . $menu->gambar) }}" alt="{{ $menu->name }}"
+                                class="w-full h-48 object-cover">
+                        @else
+                            <div
+                                class="w-full h-48 bg-gray-100 flex items-center justify-center text-gray-400 text-sm font-medium">
+                                No Image
+                            </div>
+                        @endif
+
+                        <div class="p-4">
+                            <h4 class="font-bold text-lg">{{ $menu->name }}</h4>
+                            <p class="text-[#FF7B00] font-semibold mt-1">Rp{{ number_format($menu->price, 0) }}</p>
+
+                            <div class="flex items-center justify-between mt-3">
+                                <div class="flex gap-3 text-gray-500">
+                                    <a href="{{ route('menu.edit', $menu->id) }}" title="Edit">
+                                        ✏️
+                                    </a>
+                                    <form action="{{ route('menu.destroy', $menu->id) }}" method="POST"
+                                        onsubmit="return confirm('Hapus menu ini?')">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" title="Hapus">🗑️</button>
+                                    </form>
+                                </div>
+                                <div class="text-yellow-400 text-sm">
+                                    ★★★★★
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-            @empty
-                <p class="text-white">Belum ada menu yang tersedia.</p>
-            @endforelse
-        </div>
-    </div>
-</body>
+                @empty
+                    <p class="col-span-full text-center text-gray-200">Belum ada menu yang ditambahkan.</p>
+                @endforelse
+            </div>
 
-</html>
+            <div class="text-center mt-12">
+                <a href="{{ route('menu.index') }}"
+                    class="bg-[#FF7B00] text-white font-semibold px-6 py-3 rounded-lg hover:bg-[#E56C00] transition">
+                    Manage All Menu Item
+                </a>
+            </div>
+        </div>
+    </section>
+@endsection

@@ -22,7 +22,7 @@ class MenuController extends Controller
 
     public function index()
     {
-        $menus = Menu::with('user')->orderBy('created_at', 'desc')->get();
+        $menus = Menu::with('user')->orderBy('created_at', 'desc')->take(6)->get();
 
         return view('crud.index', ['menus' => $menus]);
     }
@@ -58,7 +58,7 @@ class MenuController extends Controller
         Menu::create($validated);
 
         // Redirect dengan pesan sukses
-        return redirect()->route('menu.create')->with('success', 'Menu berhasil ditambahkan!');
+        return redirect()->route('menu.index')->with('success', 'Menu berhasil ditambahkan!');
     }
 
     /**
