@@ -21,11 +21,11 @@
     </section>
 
     {{-- ===== Latest Dishes ===== --}}
-    <section class="py-16 bg-[#45000F] text-white">
+    <section class="py-16 bg-[#45000F] text-gray-100">
         <div class="max-w-6xl mx-auto px-6">
             <h3 class="text-2xl font-bold mb-8">Your Latest Dishes</h3>
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-8">
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-8">
                 @forelse ($menus as $menu)
                     <div class="bg-white text-gray-800 rounded-xl shadow-lg overflow-hidden">
                         @if ($menu->gambar)
