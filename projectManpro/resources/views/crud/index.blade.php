@@ -3,22 +3,30 @@
 @section('title', 'Dashboard - Geprek GT')
 
 @section('content')
-    {{-- ===== Hero Section ===== --}}
-    <section class="bg-cover bg-center text-center py-24 mt-19 relative"
-        style="background-image: url('{{ asset('images/bg-hero.jpg') }}');">
-        <div class="absolute inset-0 bg-[#45000F]"></div>
+    <div class="bg-[#45000F] pt-1">
+        {{-- ===== Hero Section ===== --}}
+        <section class="bg-cover bg-center text-center py-24 mt-19 relative "
+            style="background-image: url('{{ asset('images/bg-hero.jpg') }}');">
+            <div class="absolute inset-0 "></div>
 
-        <div class="relative z-10 max-w-3xl mx-auto">
-            <div
-                class="bg-white bg-opacity-20 border-2 border-dashed border-white rounded-xl p-10 backdrop-blur-sm shadow-lg">
-                <h2 class="text-3xl md:text-4xl font-bold mb-6 text-white">Ready to share culinary creation?</h2>
-                <a href="{{ route('menu.create') }}"
-                    class="bg-[#FF7B00] text-white font-semibold px-6 py-3 rounded-lg shadow hover:bg-[#E56C00] transition">
-                    Upload/Post New Food
-                </a>
+            <div class="relative z-10 max-w-3xl mx-auto">
+                <div
+                    class="bg-white/10 backdrop-blur-md border-2 border-dashed border-white/60 rounded-2xl p-10 shadow-2xl
+               ring-1 ring-white/10 transition-all duration-300 hover:bg-white/20 hover:backdrop-blur-lg">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-6 text-white drop-shadow-lg">
+                        Ready to share culinary creation?
+                    </h2>
+                    <a href="{{ route('menu.create') }}"
+                        class="bg-[#FF7B00] text-white font-semibold px-6 py-3 rounded-lg shadow-lg 
+                   hover:bg-[#E56C00] hover:scale-105 transition-transform duration-300">
+                        Upload/Post New Food
+                    </a>
+                </div>
             </div>
-        </div>
-    </section>
+
+        </section>
+    </div>
+
 
     {{-- ===== Latest Dishes ===== --}}
     <section class="py-16 bg-[#45000F] text-gray-100">
