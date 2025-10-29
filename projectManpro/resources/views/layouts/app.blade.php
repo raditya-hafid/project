@@ -13,6 +13,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.js"></script>
 </head>
 
+<body class="flex flex-col min-h-screen m-0 p-0">
 {{-- ===== Navbar ===== --}}
 <div id="navbar" class="fixed top-0 left-0 w-full z-50 bg-[#FF7B00] shadow-md transition-transform duration-300">
     <div class="container mx-auto flex justify-between items-center p-2 px-4 md:px-15">
@@ -20,20 +21,21 @@
             <img src="{{ asset('images/logo.png') }}" alt="" class="h-15 w-auto">
         </a>
         <nav>
-            <a href="#" class="text-white mx-2 hover:text-[#45000F] transition">Home</a>
-            <a href="/product" class="text-white mx-2 hover:text-[#45000F] transition">Menu</a>
-            <a href="#" class="text-white mx-2 hover:text-[#45000F] transition">About</a>
-            <a href="#" class="text-white mx-2 hover:text-[#45000F] transition">Outlet</a>
+            <a href="/" class="text-white mx-2 hover:text-[#45000F] transition">Home</a>
+            <a href="product" class="text-white mx-2 hover:text-[#45000F] transition">Menu</a>
+            <a href="about" class="text-white mx-2 hover:text-[#45000F] transition">About</a>
+            <a href="outlet" class="text-white mx-2 hover:text-[#45000F] transition">Outlet</a>
         </nav>
     </div>
 </div>
 
-<body class="flex flex-col min-h-screen m-0 p-0">
+
 
 
 
     {{-- ===== Main Content ===== --}}
-    <main class="">
+    <main class="relative bg-fixed bg-cover bg-center min-h-screen"
+            style="background-image: url('{{ asset('images/bg-hero.jpg') }}');">
         @yield('content')
     </main>
 
@@ -72,9 +74,9 @@
 
             <div class="flex justify-center gap-8 font-medium text-sm md:text-base">
                 <a href="/" class="hover:underline">Home</a>
-                <a href="#about" class="hover:underline">About</a>
-                <a href="#outlet" class="hover:underline">Outlet</a>
-                <a href="#menu" class="hover:underline">Menu</a>
+                <a href="about" class="hover:underline">About</a>
+                <a href="outlet" class="hover:underline">Outlet</a>
+                <a href="product" class="hover:underline">Menu</a>
             </div>
         </div>
     </footer>
@@ -98,6 +100,5 @@
         });
     </script>
 </body>
-
 
 </html>
