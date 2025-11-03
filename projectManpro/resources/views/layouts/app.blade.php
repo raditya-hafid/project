@@ -22,7 +22,7 @@
         </a>
         <nav>
             <a href="/" class="text-white mx-2 hover:text-[#45000F] transition">Home</a>
-            <a href="product" class="text-white mx-2 hover:text-[#45000F] transition">Menu</a>
+            <a href="products" class="text-white mx-2 hover:text-[#45000F] transition">Menu</a>
             <a href="about" class="text-white mx-2 hover:text-[#45000F] transition">About</a>
             <a href="outlet" class="text-white mx-2 hover:text-[#45000F] transition">Outlet</a>
         </nav>
