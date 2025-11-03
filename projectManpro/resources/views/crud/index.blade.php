@@ -44,7 +44,9 @@
                                 class="w-full h-48 bg-gray-100 flex items-center justify-center text-gray-400 text-sm font-medium">
                                 No Image
                             </div>
-                        @endif
+                        @endif   
+
+                        
 
                         <div class="p-4">
                             <a href="/products/{{ $menu->id }}"><h4 class="font-bold text-lg">{{ $menu->name }}</h4></a>
