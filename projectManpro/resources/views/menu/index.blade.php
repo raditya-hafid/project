@@ -44,7 +44,7 @@
                                     </div>
                                 @endif
                                 <div class="p-4">
-                                    <h4 class="font-bold text-lg">{{ $menu->name }}</h4>
+                                    <a href="/products/{{ $menu -> id }}"><h4 class="font-bold text-lg">{{ $menu->name }}</h4></a>
                                     <p class="text-gray-600">Rp{{ number_format($menu->price, 2) }}</p>
                                     <div class="flex items-center mt-2">
                                         <span class="text-yellow-400">★★★★☆</span>
@@ -65,7 +65,8 @@
                         <div class="bg-white rounded-lg shadow-md overflow-hidden">
                             <div class="w-full h-48 bg-gray-300"></div>
                             <div class="p-4">
-                                <h4 class="font-bold text-lg">{{ $menu->name }}</h4>
+                                <a href="/products/{{ $menu -> id }}"><h4 class="font-bold text-lg">{{ $menu->name }}</h4></a>
+                                
                                 <p class="text-gray-600">Rp{{ number_format($menu->price, 2) }}</p>
                                 <div class="flex items-center mt-2">
                                     <span class="text-yellow-400">★★★★☆</span>

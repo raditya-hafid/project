@@ -8,11 +8,13 @@ use App\Http\Controllers\OutletController;
 
 Route::get('/', [HomeController::class, 'index']);
 
-Route::get('/product', [MenuController::class, 'read']);
+Route::get('/products', [MenuController::class, 'read'])->name('menu.index');
 
-Route::get('/about', [AboutController::class, 'index']);
+Route::get('/about', [AboutController::class, 'index'])->name('about.index');
 
-Route::get('/outlet', [OutletController::class, 'index']);
+Route::get('/outlet', [OutletController::class, 'index'])->name('outlet.index');
+
+Route::get('products/{menu}', [MenuController::class, 'show'])->name('product.show');
 
 Route::resource('menu', MenuController::class);
 

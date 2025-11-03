@@ -47,7 +47,8 @@
                         @endif
 
                         <div class="p-4">
-                            <h4 class="font-bold text-lg">{{ $menu->name }}</h4>
+                            <a href="/products/{{ $menu->id }}"><h4 class="font-bold text-lg">{{ $menu->name }}</h4></a>
+                            
                             <p class="text-[#FF7B00] font-semibold mt-1">Rp{{ number_format($menu->price, 0) }}</p>
 
                             <div class="flex items-center justify-between mt-3">
