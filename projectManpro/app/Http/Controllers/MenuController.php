@@ -17,12 +17,12 @@ class MenuController extends Controller
     {
         $menus = Menu::with('user')->orderBy('created_at', 'desc')->get();
 
-        return view('menu.index', ['menus' => $menus]);
+        return view('products.index', ['menus' => $menus]);
     }
 
     public function index()
     {
-        $menus = Menu::with('user')->orderBy('created_at', 'desc')->take(6)->get();
+        $menus = Menu::with('user')->orderBy('created_at', 'desc')->get();
 
         return view('crud.index', ['menus' => $menus]);
     }
@@ -66,7 +66,7 @@ class MenuController extends Controller
      */
     public function show(Menu $menu)
     {
-        return view('menu.show', ['menu' => $menu]);
+        return view('products.show', ['menu' => $menu]);
     }
 
     /**

@@ -39,10 +39,7 @@
                 <h2 class="text-2xl font-bold mb-6">Directions</h2>
                 <div class="w-full h-[350px] rounded-xl overflow-hidden shadow-lg border-4 border-white/30">
                     {{-- Google Maps Embed --}}
-                    <iframe
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3954.540458422825!2d110.83026327476559!3d-7.632345692377319!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7a1464bdf62e45%3A0x8b2b00e6ff9eac7a!2sSukoharjo%2C%20Central%20Java!5e0!3m2!1sen!2sid!4v1699323456789!5m2!1sen!2sid"
-                        width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"
-                        referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3953.8610516611775!2d110.892572!3d-7.6980569999999995!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zN8KwNDEnNTMuMCJTIDExMMKwNTMnMzMuMyJF!5e0!3m2!1sen!2sid!4v1762163815053!5m2!1sen!2sid" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                 </div>
 
                 <p class="text-sm text-white/80 mt-3">

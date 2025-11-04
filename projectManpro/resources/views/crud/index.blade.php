@@ -75,13 +75,6 @@
                     <p class="col-span-full text-center text-gray-200">Belum ada menu yang ditambahkan.</p>
                 @endforelse
             </div>
-
-            <div class="text-center mt-12">
-                <a href="{{ route('menu.index') }}"
-                    class="bg-[#FF7B00] text-white font-semibold px-6 py-3 rounded-lg hover:bg-[#E56C00] transition">
-                    Manage All Menu Item
-                </a>
-            </div>
         </div>
     </section>
 @endsection

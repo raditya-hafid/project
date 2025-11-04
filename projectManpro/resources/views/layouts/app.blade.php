@@ -22,7 +22,7 @@
         </a>
         <nav>
             <a href="/" class="text-white mx-2 hover:text-[#45000F] transition">Home</a>
-            <a href="{{ route('menu.index') }}" class="text-white mx-2 hover:text-[#45000F] transition">Menu</a>
+            <a href="{{ route('products.index') }}" class="text-white mx-2 hover:text-[#45000F] transition">Menu</a>
             <a href="{{ route('about.index') }}" class="text-white mx-2 hover:text-[#45000F] transition">About</a>
             <a href="{{ route('outlet.index') }}" class="text-white mx-2 hover:text-[#45000F] transition">Outlet</a>
         </nav>
@@ -74,9 +74,9 @@
 
             <div class="flex justify-center gap-8 font-medium text-sm md:text-base">
                 <a href="/" class="hover:underline">Home</a>
-                <a href="about" class="hover:underline">About</a>
-                <a href="outlet" class="hover:underline">Outlet</a>
-                <a href="product" class="hover:underline">Menu</a>
+                <a href="{{ route('about.index') }}" class="hover:underline">About</a>
+                <a href="{{ route('outlet.index') }}" class="hover:underline">Outlet</a>
+                <a href="{{ route('products.index') }}" class="hover:underline">Menu</a>
             </div>
         </div>
     </footer>
