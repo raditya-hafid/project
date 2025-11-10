@@ -13,12 +13,6 @@ class MenuController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function read()
-    {
-        $menus = Menu::with('user')->orderBy('created_at', 'desc')->get();
-
-        return view('products.index', ['menus' => $menus]);
-    }
 
     public function index()
     {
@@ -40,24 +34,44 @@ class MenuController extends Controller
      */
     public function store(Request $request)
     {
+        // 🔹 Validasi input
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'description' => 'nullable|string',
             'price' => 'required|numeric|min:0',
             'promo' => 'required|boolean',
-            'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'gambar' => 'nullable',
         ]);
 
-        // Upload gambar jika ada
-        if ($request->hasFile('gambar')) {
-            $path = $request->file('gambar')->store('menus', 'public');
-            $validated['gambar'] = $path;
+        //  Cek apakah gambar dikirim dalam bentuk base64 (hasil crop)
+        if ($request->filled('gambar')) {
+            $imageData = $request->gambar;
+
+            // Pastikan format base64 valid
+            if (preg_match('/^data:image\/(\w+);base64,/', $imageData, $type)) {
+                $image = substr($imageData, strpos($imageData, ',') + 1);
+                $type = strtolower($type[1]); // jpeg, png, gif, dll
+
+                if (!in_array($type, ['jpg', 'jpeg', 'png', 'gif'])) {
+                    return back()->withErrors(['gambar' => 'Format gambar tidak didukung.']);
+                }
+
+                $image = str_replace(' ', '+', $image);
+                $imageName = 'menus/' . uniqid() . '.' . $type;
+
+                // Simpan ke storage/public/menus
+                Storage::disk('public')->put($imageName, base64_decode($image));
+
+                $validated['gambar'] = $imageName;
+            } else {
+                return back()->withErrors(['gambar' => 'Format base64 tidak valid.']);
+            }
         }
 
-        // Simpan data ke database
+        //  Simpan data ke database
         Menu::create($validated);
 
-        // Redirect dengan pesan sukses
+        //  Redirect dengan pesan sukses
         return redirect()->route('menu.index')->with('success', 'Menu berhasil ditambahkan!');
     }
 
@@ -66,7 +80,7 @@ class MenuController extends Controller
      */
     public function show(Menu $menu)
     {
-        return view('products.show', ['menu' => $menu]);
+        return view('crud.show', ['menu' => $menu]);
     }
 
     /**

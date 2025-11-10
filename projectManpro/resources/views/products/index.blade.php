@@ -45,13 +45,13 @@
                     style="font-family: 'Luckiest Guy', cursive; font-size: clamp(1.5rem, 4vw, 2.5rem); text-shadow: 2px 3px 3px rgba(0,0,0,0.4);">
                     HOT PROMO </h3>
                 <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 gap-3 sm:gap-4 md:gap-6 mt-4">
-                    @forelse ($menus as $menu)
-                        @if ($menu->promo == 1)
+                    @forelse ($products as $product)
+                        @if ($product->promo == 1)
                             <div
                                 class="bg-gray-50 rounded-2xl shadow-md overflow-hidden hover:shadow-lg transition duration-300 flex flex-col">
                                 {{-- Gambar --}}
-                                @if ($menu->gambar)
-                                    <img src="{{ asset('storage/' . $menu->gambar) }}" alt="{{ $menu->name }}"
+                                @if ($product->gambar)
+                                    <img src="{{ asset('storage/' . $product->gambar) }}" alt="{{ $product->name }}"
                                         class="w-full h-48 sm:h-56 md:h-64 lg:h-72 object-cover">
                                 @else
                                     <div
@@ -65,15 +65,15 @@
                                     class="bg-gray-50 rounded-2xl shadow-md overflow-hidden hover:shadow-lg transition duration-300 p-4">
                                     {{-- Bagian atas: nama dan rating --}}
                                     <div class="flex justify-between items-center">
-                                        <h4 class="font-bold text-gray-900 text-base md:text-lg">{{ $menu->name }}</h4>
+                                        <h4 class="font-bold text-gray-900 text-base md:text-lg">{{ $product->name }}</h4>
                                         <div class="text-yellow-400 text-sm sm:text-base">★★★★★</div>
                                     </div>
 
                                     {{-- Bagian bawah: harga dan tombol sejajar --}}
                                     <div class="flex justify-between items-center mt-2">
                                         <p class="text-gray-800 font-bold text-lg md:text-xl">
-                                            Rp{{ number_format($menu->price, 0, ',', '.') }}</p>
-                                        <a href="/products/{{ $menu->id }}"
+                                            Rp{{ number_format($product->price, 0, ',', '.') }}</p>
+                                        <a href="/products/{{ $product->id }}"
                                             class="bg-[#FF7B00] text-white font-semibold text-sm px-4 py-2 rounded-full hover:bg-[#e86f00] transition">
                                             Detail →
                                         </a>
@@ -88,7 +88,7 @@
                 </div>
 
             </div>
-            {{-- BAGIAN ALL MENU --}}
+            {{-- BAGIAN ALL Product --}}
             <div class="mt-10">
                 <h2 class="font-bold text-white text-sm sm:text-base" style="font-family: 'Montserrat', sans-serif;">Geprek
                     GT</h2>
@@ -96,11 +96,11 @@
                     style="font-family: 'Luckiest Guy', cursive; font-size: clamp(1.5rem, 4vw, 2.5rem); text-shadow: 2px 3px 3px rgba(0,0,0,0.4);">
                     ALL MENU </h3>
                 <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 sm:gap-4 md:gap-6 mt-4">
-                    @forelse ($menus as $menu)
-                        <a href="/products/{{ $menu->id }}"
+                    @forelse ($products as $product)
+                        <a href="/products/{{ $product->id }}"
                             class="block bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition duration-300">
-                            @if ($menu->gambar)
-                                <img src="{{ asset('storage/' . $menu->gambar) }}" alt="{{ $menu->name }}"
+                            @if ($product->gambar)
+                                <img src="{{ asset('storage/' . $product->gambar) }}" alt="{{ $product->name }}"
                                     class="w-full h-48 sm:h-56 md:h-64 lg:h-64 object-cover">
                             @else
                                 <div
@@ -111,8 +111,8 @@
                             <div class="p-2 sm:p-3">
                                 <h4
                                     class="font-bold text-xs sm:text-sm md:text-lg text-gray-900 hover:text-[#FF7B00] transition-colors truncate">
-                                    {{ $menu->name }} </h4>
-                                <p class="text-gray-600 text-xs sm:text-sm">Rp{{ number_format($menu->price, 2) }}</p>
+                                    {{ $product->name }} </h4>
+                                <p class="text-gray-600 text-xs sm:text-sm">Rp{{ number_format($product->price, 2) }}</p>
                                 <div class="flex items-center mt-1 text-[10px] sm:text-sm"> <span
                                         class="text-yellow-400">★★★★☆</span> </div>
                             </div>

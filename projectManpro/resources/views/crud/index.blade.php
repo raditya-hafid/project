@@ -17,7 +17,7 @@
                         Ready to share culinary creation?
                     </h2>
                     <a href="{{ route('menu.create') }}"
-                        class="bg-[#FF7B00] text-white font-semibold px-6 py-3 rounded-lg shadow-lg 
+                        class="bg-[#FF7B00] text-white font-semibold px-6 py-3 rounded-lg shadow-lg
                    hover:bg-[#E56C00] hover:scale-105 transition-transform duration-300">
                         Upload/Post New Food
                     </a>
@@ -44,13 +44,13 @@
                                 class="w-full h-48 bg-gray-100 flex items-center justify-center text-gray-400 text-sm font-medium">
                                 No Image
                             </div>
-                        @endif   
+                        @endif
 
-                        
+
 
                         <div class="p-4">
-                            <a href="/products/{{ $menu->id }}"><h4 class="font-bold text-lg">{{ $menu->name }}</h4></a>
-                            
+                            <a href="/menu/{{ $menu->id }}"><h4 class="font-bold text-lg">{{ $menu->name }}</h4></a>
+
                             <p class="text-[#FF7B00] font-semibold mt-1">Rp{{ number_format($menu->price, 0) }}</p>
 
                             <div class="flex items-center justify-between mt-3">
