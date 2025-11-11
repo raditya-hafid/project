@@ -86,16 +86,12 @@
 
             {{-- ================= MENU BY CATEGORY ================= --}}
             <div class="mt-10">
-                <h2 class="font-bold text-white text-sm sm:text-base" style="font-family: 'Montserrat', sans-serif;">Geprek GT</h2>
-                <h3 class="font-bold text-[#FF7B00]"
-                    style="font-family: 'Luckiest Guy', cursive; font-size: clamp(1.5rem, 4vw, 2.5rem); text-shadow: 2px 3px 3px rgba(0,0,0,0.4);">
-                    MENU BY CATEGORY
-                </h3>
 
                 @forelse ($categories as $category)
                     <div class="mt-8">
-                        <h4 class="text-xl font-bold text-white mb-3"
-                            style="font-family: 'Montserrat', sans-serif; text-shadow: 2px 2px 3px rgba(0,0,0,0.3);">
+                        <h2 class="font-bold text-white text-sm sm:text-base" style="font-family: 'Montserrat', sans-serif;">Geprek GT</h2>
+                        <h4 class="font-bold text-[#FF7B00]"
+                            style="font-family: 'Luckiest Guy', cursive; font-size: clamp(1.5rem, 4vw, 2.5rem); text-shadow: 2px 3px 3px rgba(0,0,0,0.4);">
                             {{ $category->name_kategori }}
                         </h4>
 
