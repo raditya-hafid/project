@@ -14,20 +14,28 @@
 </head>
 
 <body class="flex flex-col min-h-screen m-0 p-0">
-{{-- ===== Navbar ===== --}}
-<div id="navbar" class="fixed top-0 left-0 w-full z-50 bg-[#FF7B00] shadow-md transition-transform duration-300">
-    <div class="container mx-auto flex justify-between items-center p-2 px-4 md:px-15">
-        <a href="/">
-            <img src="{{ asset('images/logo.png') }}" alt="" class="h-15 w-auto">
-        </a>
-        <nav>
-            <a href="/" class="text-white mx-2 hover:text-[#45000F] transition">Home</a>
-            <a href="{{ route('products.index') }}" class="text-white mx-2 hover:text-[#45000F] transition">Menu</a>
-            <a href="{{ route('about.index') }}" class="text-white mx-2 hover:text-[#45000F] transition">About</a>
-            <a href="{{ route('outlet.index') }}" class="text-white mx-2 hover:text-[#45000F] transition">Outlet</a>
-        </nav>
+    {{-- ===== Navbar ===== --}}
+    <div id="navbar" class="fixed top-0 left-0 w-full z-50 bg-[#FF7B00] shadow-md transition-transform duration-300">
+        <div class="container mx-auto flex justify-between items-center p-2 px-4 md:px-15">
+            <a href="/">
+                <img src="{{ asset('images/logo.png') }}" alt="" class="h-15 w-auto">
+            </a>
+            <nav>
+                @auth
+                    <form action="/logout" method="post" style="display: inline;">
+                        @csrf
+                        <button type="submit"
+                            style="background: none; border: none; color: #fefefe; cursor: pointer; padding: 0; margin-left: 1rem;">Logout</button>
+                    </form>
+                    <a href="/menu" class="text-white mx-2 hover:text-[#45000F] transition">Dashboard</a>
+                @endauth
+                <a href="/" class="text-white mx-2 hover:text-[#45000F] transition">Home</a>
+                <a href="{{ route('products.index') }}" class="text-white mx-2 hover:text-[#45000F] transition">Menu</a>
+                <a href="{{ route('about.index') }}" class="text-white mx-2 hover:text-[#45000F] transition">About</a>
+                <a href="{{ route('outlet.index') }}" class="text-white mx-2 hover:text-[#45000F] transition">Outlet</a>
+            </nav>
+        </div>
     </div>
-</div>
 
 
 
@@ -35,7 +43,7 @@
 
     {{-- ===== Main Content ===== --}}
     <main class="relative bg-fixed bg-cover bg-center min-h-screen"
-            style="background-image: url('{{ asset('images/bg-hero.jpg') }}');">
+        style="background-image: url('{{ asset('images/bg-hero.jpg') }}');">
         @yield('content')
     </main>
 
