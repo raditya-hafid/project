@@ -4,6 +4,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use App\Models\Menu;
+use App\Models\Category;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -13,7 +14,7 @@ class User extends Authenticatable
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable;
 
-    
+
 
     /**
      * The attributes that are mass assignable.
@@ -28,6 +29,10 @@ class User extends Authenticatable
 
     public function menu(){
         return $this->hasMany(Menu::class);
+    }
+
+    public function category(){
+        return $this->hasMany(Category::class);
     }
 
     /**

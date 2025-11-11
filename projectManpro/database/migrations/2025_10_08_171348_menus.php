@@ -18,6 +18,7 @@ return new class extends Migration
             $table->decimal('price',10, 2);
             $table->boolean('promo')->default(false);
             $table->foreignId('id_user')->nullable()->constrained('users')->onDelete('set null');
+            $table->foreignId('id_category')->nullable()->constrained('categories')->onDelete('set null');
             $table->string('gambar')->nullable();
             $table->timestamps();
         });

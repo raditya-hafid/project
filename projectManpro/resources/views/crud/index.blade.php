@@ -35,6 +35,9 @@
 
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-8">
                 @forelse ($menus as $menu)
+                {{-- @if ($menu->id_category == 1)
+
+                @endif --}}
                     <div class="bg-white text-gray-800 rounded-xl shadow-lg overflow-hidden">
                         @if ($menu->gambar)
                             <img src="{{ asset('storage/' . $menu->gambar) }}" alt="{{ $menu->name }}"

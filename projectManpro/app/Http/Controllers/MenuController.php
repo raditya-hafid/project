@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 // tes
 
 use App\Models\Menu;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -17,8 +18,8 @@ class MenuController extends Controller
     public function index()
     {
         $menus = Menu::with('user')->orderBy('created_at', 'desc')->get();
-
-        return view('crud.index', ['menus' => $menus]);
+        $categories = Category::all();
+        return view('crud.index', ['menus' => $menus], compact('categories'));
     }
 
     /**
@@ -26,7 +27,11 @@ class MenuController extends Controller
      */
     public function create()
     {
-        return view('crud.create');
+        // 1. Ambil semua data kategori
+        $categories = Category::all();
+
+        // 2. Kirim data kategori ke view
+        return view('crud.create', compact('categories'));
     }
 
     /**
@@ -37,6 +42,7 @@ class MenuController extends Controller
         // 🔹 Validasi input
         $validated = $request->validate([
             'name' => 'required|string|max:255',
+            'id_category' => 'required|exists:categories,id',
             'description' => 'nullable|string',
             'price' => 'required|numeric|min:0',
             'promo' => 'required|boolean',
@@ -88,7 +94,9 @@ class MenuController extends Controller
      */
     public function edit(Menu $menu)
     {
-        return view('crud.edit', ['menu' => $menu]);
+        $categories = Category::all();
+
+        return view('crud.edit', ['menu' => $menu], compact('categories'));
     }
 
     /**
@@ -98,24 +106,28 @@ class MenuController extends Controller
     {
         $validated = $request->validate([
             'name' => 'required|string|max:255',
+            'id_category' => 'required|exists:categories,id',
             'description' => 'nullable|string',
             'price' => 'required|numeric|min:0',
             'promo' => 'required|boolean',
-            'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'cropped_image' => 'nullable|string', // base64 hasil crop
         ]);
 
-        // Handle gambar upload
-        if ($request->hasFile('gambar')) {
-            // Hapus gambar lama jika ada
+        // Jika ada gambar baru hasil crop
+        if ($request->cropped_image) {
+            // Hapus gambar lama
             if ($menu->gambar) {
                 Storage::disk('public')->delete($menu->gambar);
             }
-            // Upload gambar baru
-            $path = $request->file('gambar')->store('menus', 'public');
-            $validated['gambar'] = $path;
+
+            // Decode base64 dan simpan file
+            $imageData = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $request->cropped_image));
+            $imageName = 'menus/' . uniqid() . '.png';
+            Storage::disk('public')->put($imageName, $imageData);
+
+            $validated['gambar'] = $imageName;
         }
 
-        // Update data menu
         $menu->update($validated);
 
         return redirect()->route('menu.index')->with('success', 'Menu berhasil diperbarui!');

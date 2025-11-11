@@ -1,10 +1,9 @@
 @extends('layouts.app')
 @section('title', 'Home - Geprek GT')
-@section('content')
 
+@section('content')
     <div class="bg-[#45000F]">
-        {{-- BAGIAN HERO --}}
-        {{-- BAGIAN HERO --}}
+        {{-- ================= HERO SECTION ================= --}}
         <div class="bg-cover bg-center min-h-[500px] flex items-center pt-32 md:pt-40"
             style="background-image: url('{{ asset('images/Rectangle.png') }}')">
             <div
@@ -36,14 +35,15 @@
             </div>
         </div>
 
-        {{-- BAGIAN HOT PROMO --}}
+        {{-- ================= HOT PROMO ================= --}}
         <div class="container mx-auto py-8 px-4 sm:px-6 md:px-10 lg:px-20">
             <div class="mt-4 sm:mt-8">
-                <h2 class="font-bold text-white text-sm sm:text-base" style="font-family: 'Montserrat', sans-serif;">Geprek
-                    GT</h2>
-                <h3 class="font-bold text-[#FF7B00] "
+                <h2 class="font-bold text-white text-sm sm:text-base" style="font-family: 'Montserrat', sans-serif;">Geprek GT</h2>
+                <h3 class="font-bold text-[#FF7B00]"
                     style="font-family: 'Luckiest Guy', cursive; font-size: clamp(1.5rem, 4vw, 2.5rem); text-shadow: 2px 3px 3px rgba(0,0,0,0.4);">
-                    HOT PROMO </h3>
+                    HOT PROMO
+                </h3>
+
                 <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 gap-3 sm:gap-4 md:gap-6 mt-4">
                     @forelse ($products as $product)
                         @if ($product->promo == 1)
@@ -61,15 +61,12 @@
                                 @endif
 
                                 {{-- Isi Card --}}
-                                <div
-                                    class="bg-gray-50 rounded-2xl shadow-md overflow-hidden hover:shadow-lg transition duration-300 p-4">
-                                    {{-- Bagian atas: nama dan rating --}}
+                                <div class="p-4">
                                     <div class="flex justify-between items-center">
                                         <h4 class="font-bold text-gray-900 text-base md:text-lg">{{ $product->name }}</h4>
                                         <div class="text-yellow-400 text-sm sm:text-base">★★★★★</div>
                                     </div>
 
-                                    {{-- Bagian bawah: harga dan tombol sejajar --}}
                                     <div class="flex justify-between items-center mt-2">
                                         <p class="text-gray-800 font-bold text-lg md:text-xl">
                                             Rp{{ number_format($product->price, 0, ',', '.') }}</p>
@@ -79,48 +76,71 @@
                                         </a>
                                     </div>
                                 </div>
-
                             </div>
                         @endif
                     @empty
                         <p class="text-white">Belum ada promo.</p>
                     @endforelse
                 </div>
-
             </div>
-            {{-- BAGIAN ALL Product --}}
+
+            {{-- ================= MENU BY CATEGORY ================= --}}
             <div class="mt-10">
-                <h2 class="font-bold text-white text-sm sm:text-base" style="font-family: 'Montserrat', sans-serif;">Geprek
-                    GT</h2>
+                <h2 class="font-bold text-white text-sm sm:text-base" style="font-family: 'Montserrat', sans-serif;">Geprek GT</h2>
                 <h3 class="font-bold text-[#FF7B00]"
                     style="font-family: 'Luckiest Guy', cursive; font-size: clamp(1.5rem, 4vw, 2.5rem); text-shadow: 2px 3px 3px rgba(0,0,0,0.4);">
-                    ALL MENU </h3>
-                <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 sm:gap-4 md:gap-6 mt-4">
-                    @forelse ($products as $product)
-                        <a href="/products/{{ $product->id }}"
-                            class="block bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition duration-300">
-                            @if ($product->gambar)
-                                <img src="{{ asset('storage/' . $product->gambar) }}" alt="{{ $product->name }}"
-                                    class="w-full h-48 sm:h-56 md:h-64 lg:h-64 object-cover">
-                            @else
-                                <div
-                                    class="w-full h-48 sm:h-56 md:h-64 lg:h-64 bg-gray-100 flex items-center justify-center text-gray-400">
-                                    <span>Tidak ada gambar</span>
-                                </div>
-                            @endif
-                            <div class="p-2 sm:p-3">
-                                <h4
-                                    class="font-bold text-xs sm:text-sm md:text-lg text-gray-900 hover:text-[#FF7B00] transition-colors truncate">
-                                    {{ $product->name }} </h4>
-                                <p class="text-gray-600 text-xs sm:text-sm">Rp{{ number_format($product->price, 2) }}</p>
-                                <div class="flex items-center mt-1 text-[10px] sm:text-sm"> <span
-                                        class="text-yellow-400">★★★★☆</span> </div>
+                    MENU BY CATEGORY
+                </h3>
+
+                @forelse ($categories as $category)
+                    <div class="mt-8">
+                        <h4 class="text-xl font-bold text-white mb-3"
+                            style="font-family: 'Montserrat', sans-serif; text-shadow: 2px 2px 3px rgba(0,0,0,0.3);">
+                            {{ $category->name_kategori }}
+                        </h4>
+
+                        @php
+                            $categoryProducts = $products->where('id_category', $category->id);
+                        @endphp
+
+                        @if ($categoryProducts->isNotEmpty())
+                            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 sm:gap-4 md:gap-6">
+                                @foreach ($categoryProducts as $product)
+                                    <a href="/products/{{ $product->id }}"
+                                        class="block bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition duration-300">
+                                        @if ($product->gambar)
+                                            <img src="{{ asset('storage/' . $product->gambar) }}" alt="{{ $product->name }}"
+                                                class="w-full h-48 sm:h-56 md:h-64 lg:h-64 object-cover">
+                                        @else
+                                            <div
+                                                class="w-full h-48 sm:h-56 md:h-64 lg:h-64 bg-gray-100 flex items-center justify-center text-gray-400">
+                                                <span>Tidak ada gambar</span>
+                                            </div>
+                                        @endif
+
+                                        <div class="p-2 sm:p-3">
+                                            <h4
+                                                class="font-bold text-xs sm:text-sm md:text-lg text-gray-900 hover:text-[#FF7B00] transition-colors truncate">
+                                                {{ $product->name }}
+                                            </h4>
+                                            <p class="text-gray-600 text-xs sm:text-sm">
+                                                Rp{{ number_format($product->price, 0, ',', '.') }}
+                                            </p>
+                                            <div class="flex items-center mt-1 text-[10px] sm:text-sm">
+                                                <span class="text-yellow-400">★★★★☆</span>
+                                            </div>
+                                        </div>
+                                    </a>
+                                @endforeach
                             </div>
-                    </a> @empty <p class="text-white">Belum ada menu yang tersedia.</p>
-                    @endforelse
-                </div>
+                        @else
+                            <p class="text-white text-sm">Belum ada menu di kategori ini.</p>
+                        @endif
+                    </div>
+                @empty
+                    <p class="text-white mt-4">Belum ada kategori yang tersedia.</p>
+                @endforelse
             </div>
         </div>
     </div>
-
 @endsection
