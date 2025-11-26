@@ -14,11 +14,20 @@
 
 <body>
 
-    <section class="relative absolute bg-cover min-h-screen flex items-center justify-center"
-        style="background-image: url('{{ asset('images/bg-hero.jpg') }}');">
+    <section class="relative bg-cover bg-center min-h-screen flex items-center justify-center"
+        style="background-image: url('{{ asset('images/bg-hero.webp') }}');">
 
-        <div class="absolute inset-0 bg-no-repeat bg-center bg-contain"
-            style="background-image: url('{{ asset('images/logo.png') }}');"></div>
+        <!-- LOGO BARU -->
+        <div class="absolute inset-0 flex justify-center items-center pointer-events-none">
+            <div class="bg-center bg-no-repeat"
+                style="
+            background-image: url('{{ asset('images/logo.webp') }}');
+            background-size: 800px;
+            width: 800px;
+            height: 800px;
+        ">
+            </div>
+        </div>
 
         <div
             class="relative z-10 bg-[#FFFFFF]/20 backdrop-blur-md text-white p-10 rounded-2xl shadow-2xl w-full max-w-md border border-gray-700">

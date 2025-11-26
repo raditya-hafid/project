@@ -35,16 +35,16 @@
 
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-8">
                 @forelse ($menus as $menu)
-                {{-- @if ($menu->id_category == 1)
+                    {{-- @if ($menu->id_category == 1)
 
                 @endif --}}
                     <div class="bg-white text-gray-800 rounded-xl shadow-lg overflow-hidden">
                         @if ($menu->gambar)
                             <img src="{{ asset('storage/' . $menu->gambar) }}" alt="{{ $menu->name }}"
-                                class="w-full h-48 object-cover">
+                                class="w-full aspect-square object-cover">
                         @else
                             <div
-                                class="w-full h-48 bg-gray-100 flex items-center justify-center text-gray-400 text-sm font-medium">
+                                class="w-full aspect-square bg-gray-100 flex items-center justify-center text-gray-400 text-sm">
                                 No Image
                             </div>
                         @endif
@@ -52,27 +52,44 @@
 
 
                         <div class="p-4">
-                            <a href="/menu/{{ $menu->id }}"><h4 class="font-bold text-lg">{{ $menu->name }}</h4></a>
 
-                            <p class="text-[#FF7B00] font-semibold mt-1">Rp{{ number_format($menu->price, 0) }}</p>
+                            <!-- BARIS 1: Nama & Harga -->
+                            <div class="flex justify-between items-center w-full">
+                                <a href="/menu/{{ $menu->id }}">
+                                    <h4 class="font-bold text-lg">{{ $menu->name }}</h4>
+                                </a>
 
-                            <div class="flex items-center justify-between mt-3">
-                                <div class="flex gap-3 text-gray-500">
-                                    <a href="{{ route('menu.edit', $menu->id) }}" title="Edit">
-                                        ✏️
-                                    </a>
+                                <p class="text-[#FF7B00] font-semibold text-base">
+                                    Rp{{ number_format($menu->price, 0) }}
+                                </p>
+                            </div>
+
+                            <!-- BARIS 2: Edit/Hapus & Rating -->
+                            <div class="flex justify-between items-center w-full mt-3">
+
+                                <!-- Edit & Delete -->
+                                <div class="flex gap-3 text-gray-500 text-xl">
+                                    <a href="{{ route('menu.edit', $menu->id) }}" title="Edit">✏️</a>
+
                                     <form action="{{ route('menu.destroy', $menu->id) }}" method="POST"
-                                        onsubmit="return confirm('Hapus menu ini?')">
+                                        onsubmit="return confirm('Hapus menu ini?')" class="inline">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" title="Hapus">🗑️</button>
                                     </form>
                                 </div>
-                                <div class="text-yellow-400 text-sm">
+
+                                <!-- Rating -->
+                                <div class="text-yellow-400 text-lg">
                                     ★★★★★
                                 </div>
+
                             </div>
+
                         </div>
+
+
+
                     </div>
                 @empty
                     <p class="col-span-full text-center text-gray-200">Belum ada menu yang ditambahkan.</p>
