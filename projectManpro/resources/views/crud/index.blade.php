@@ -40,11 +40,13 @@
                 @endif --}}
                     <div class="bg-white text-gray-800 rounded-xl shadow-lg overflow-hidden">
                         @if ($menu->gambar)
-                            <img src="{{ asset('storage/' . $menu->gambar) }}" alt="{{ $menu->name }}"
-                                class="w-full aspect-square object-cover">
+                            <div class="w-full aspect-[7/5] overflow-hidden rounded-xl">
+                                <img src="{{ asset('storage/' . $menu->gambar) }}" alt="{{ $menu->name }}"
+                                    class="w-full h-full object-cover">
+                            </div>
                         @else
                             <div
-                                class="w-full aspect-square bg-gray-100 flex items-center justify-center text-gray-400 text-sm">
+                                class="w-full aspect-[7/5] bg-gray-100 flex items-center justify-center text-gray-400 text-sm">
                                 No Image
                             </div>
                         @endif

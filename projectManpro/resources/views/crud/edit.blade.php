@@ -19,8 +19,7 @@
 
         <!-- LOGO BESAR DI TENGAH (TIDAK TRANSPARAN) -->
         <div class="absolute inset-0 flex justify-center items-center pointer-events-none">
-            <div
-                class="bg-center bg-no-repeat"
+            <div class="bg-center bg-no-repeat"
                 style="
                     background-image: url('{{ asset('images/logo.webp') }}');
                     background-size: 800px;
@@ -43,9 +42,11 @@
 
                 <!-- Nama -->
                 <div>
-                    <label for="name" class="block font-semibold drop-shadow-[2px_2px_0_#000] mb-1">Nama Menu</label>
+                    <label for="name" class="block font-semibold drop-shadow-[2px_2px_0_#000] mb-1">Nama
+                        Menu</label>
                     <input type="text" id="name" name="name" value="{{ old('name', $menu->name) }}"
-                        class="w-full rounded-full p-2 text-gray-900 focus:ring-2 focus:ring-[#FF7B00] outline-none" required>
+                        class="w-full rounded-full p-2 text-gray-900 focus:ring-2 focus:ring-[#FF7B00] outline-none"
+                        required>
                 </div>
 
                 <!-- Kategori -->
@@ -53,7 +54,8 @@
                     <label class="block font-semibold drop-shadow-[2px_2px_0_#000] mb-1">Kategori Menu</label>
                     <div class="text-gray-900">
                         <select id="id_category" name="id_category"
-                            class="w-full rounded-full p-2 text-gray-900 focus:ring-2 focus:ring-[#FF7B00] outline-none" required>
+                            class="w-full rounded-full p-2 text-gray-900 focus:ring-2 focus:ring-[#FF7B00] outline-none"
+                            required>
                             <option value="" disabled>-- Pilih Kategori --</option>
                             @foreach ($categories as $category)
                                 <option value="{{ $category->id }}"
@@ -67,7 +69,8 @@
 
                 <!-- Deskripsi -->
                 <div>
-                    <label for="description" class="block font-semibold drop-shadow-[2px_2px_0_#000] mb-1">Deskripsi</label>
+                    <label for="description"
+                        class="block font-semibold drop-shadow-[2px_2px_0_#000] mb-1">Deskripsi</label>
                     <textarea id="description" name="description" rows="3"
                         class="w-full rounded-lg p-2 text-gray-900 focus:ring-2 focus:ring-[#FF7B00] outline-none">{{ old('description', $menu->description) }}</textarea>
                 </div>
@@ -76,7 +79,8 @@
                 <div>
                     <label for="price" class="block font-semibold drop-shadow-[2px_2px_0_#000] mb-1">Harga</label>
                     <input type="number" id="price" name="price" value="{{ old('price', $menu->price) }}"
-                        class="w-full rounded-full p-2 text-gray-900 focus:ring-2 focus:ring-[#FF7B00] outline-none" required>
+                        class="w-full rounded-full p-2 text-gray-900 focus:ring-2 focus:ring-[#FF7B00] outline-none"
+                        required>
                 </div>
 
                 <!-- Promo -->
@@ -106,7 +110,7 @@
                     <input type="hidden" name="cropped_image" id="cropped_image">
 
                     <div class="mt-3">
-                        <img id="preview" class="hidden w-full rounded-lg shadow-lg" alt="Preview Gambar">
+                        <img id="preview" class="hidden w-full aspect-[7/5] object-cover rounded-lg shadow-lg" alt="Preview Gambar">
                     </div>
                 </div>
 
@@ -158,15 +162,17 @@
                 modal.classList.remove('hidden');
 
                 if (cropper) cropper.destroy();
+
                 cropper = new Cropper(cropImage, {
-                    aspectRatio: 1,
+                    aspectRatio: 7 / 5, // 🔥 RASIO PERSEGI PANJANG
                     viewMode: 1,
                     movable: true,
                     zoomable: true,
                     scalable: false,
-                    background: false,
+                    background: false
                 });
             };
+
             reader.readAsDataURL(file);
         });
 
@@ -178,7 +184,7 @@
 
         document.getElementById('confirmCrop').addEventListener('click', () => {
             const canvas = cropper.getCroppedCanvas({
-                width: 500,
+                width: 700, // 🔥 Harus mengikuti aspect ratio
                 height: 500,
             });
 
@@ -196,6 +202,7 @@
             cropper.destroy();
         });
     </script>
+
 
 </body>
 

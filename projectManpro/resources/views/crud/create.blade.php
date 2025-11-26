@@ -154,7 +154,7 @@
 
                 if (cropper) cropper.destroy();
                 cropper = new Cropper(cropImage, {
-                    aspectRatio: 1,
+                    aspectRatio: 7 / 5, // RASIO PERSEGI PANJANG
                     viewMode: 1,
                     movable: true,
                     zoomable: true,
@@ -173,29 +173,25 @@
 
         document.getElementById('confirmCrop').addEventListener('click', () => {
             const canvas = cropper.getCroppedCanvas({
-                width: 500,
-                height: 500,
+                width: 700,
+                height: 500, // cocok hasil ratio 7:5
             });
 
             canvas.toBlob((blob) => {
-                const file = new File([blob], "cropped.png", {
-                    type: "image/png"
-                });
-
-                // Simpan base64 ke input hidden
                 const reader = new FileReader();
                 reader.onloadend = () => {
-                    croppedInput.value = reader.result; // simpan base64
+                    croppedInput.value = reader.result;
                     preview.src = reader.result;
                     preview.classList.remove('hidden');
                 };
-                reader.readAsDataURL(file);
+                reader.readAsDataURL(blob);
             });
 
             modal.classList.add('hidden');
             cropper.destroy();
         });
     </script>
+
 
 </body>
 
