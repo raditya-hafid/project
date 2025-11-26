@@ -184,8 +184,8 @@
 
         document.getElementById('confirmCrop').addEventListener('click', () => {
             const canvas = cropper.getCroppedCanvas({
-                width: 700, // 🔥 Harus mengikuti aspect ratio
-                height: 500,
+                width: 840, // 🔥 Harus mengikuti aspect ratio
+                height: 600,
             });
 
             canvas.toBlob((blob) => {

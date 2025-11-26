@@ -173,8 +173,8 @@
 
         document.getElementById('confirmCrop').addEventListener('click', () => {
             const canvas = cropper.getCroppedCanvas({
-                width: 700,
-                height: 500, // cocok hasil ratio 7:5
+                width: 840,
+                height: 600, // cocok hasil ratio 7:5
             });
 
             canvas.toBlob((blob) => {
