@@ -38,7 +38,7 @@
                     {{-- @if ($menu->id_category == 1)
 
                 @endif --}}
-                    <div class="bg-white text-gray-800 rounded-xl shadow-lg overflow-hidden">
+                    <div class="bg-white text-[#1E1E2F] rounded-2xl shadow-lg overflow-hidden hover:scale-[1.05] transition-transform duration-300">
                         @if ($menu->gambar)
                             <div class="w-full aspect-[7/5] overflow-hidden rounded-xl">
                                 <a href="/menu/{{ $menu->id }}"><img src="{{ asset('storage/' . $menu->gambar) }}"
@@ -72,13 +72,10 @@
                                 <!-- Edit & Delete -->
                                 <div class="flex gap-3 text-gray-500 text-xl">
                                     <a href="{{ route('menu.edit', $menu->id) }}" title="Edit">✏️</a>
-
-                                    <form action="{{ route('menu.destroy', $menu->id) }}" method="POST"
-                                        onsubmit="return confirm('Hapus menu ini?')" class="inline">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" title="Hapus">🗑️</button>
-                                    </form>
+                                    <button title="Hapus"
+                                        onclick="openDeleteModal('{{ $menu->id }}', '{{ $menu->name }}')">
+                                        🗑️
+                                    </button>
                                 </div>
 
                                 <!-- Rating -->
@@ -96,6 +93,39 @@
                 @empty
                     <p class="col-span-full text-center text-gray-200">Belum ada menu yang ditambahkan.</p>
                 @endforelse
+
+                <!-- Delete Confirmation Modal -->
+                <div id="deleteModal"
+                    class="fixed inset-0 bg-black/60 flex items-center justify-center hidden z-50">
+                    
+                    <div
+                        class="bg-[#45000F] text-white rounded-3xl p-8 max-w-md w-full text-center shadow-2xl border border-white/20">
+
+                        <h3 class="text-xl font-semibold mb-6">
+                            Apakah Anda Yakin Ingin Menghapus Menu <span id="productName" class="font-bold"></span>?
+                        </h3>
+
+                        <form id="deleteForm" method="POST">
+                            @csrf
+                            @method('DELETE')
+
+                            <div class="flex justify-center gap-4">
+                                <button type="submit"
+                                    class="bg-red-600 px-6 py-3 rounded-lg font-semibold hover:bg-red-700 transition">
+                                    Hapus
+                                </button>
+
+                                <button type="button"
+                                    onclick="closeDeleteModal()"
+                                    class="bg-gray-400 px-6 py-3 rounded-lg font-semibold text-gray-900 hover:bg-gray-500 transition">
+                                    Batal
+                                </button>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+
             </div>
         </div>
     </section>

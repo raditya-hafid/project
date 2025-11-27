@@ -17,7 +17,7 @@
 
 </head>
 
-<body class="flex flex-col min-h-screen m-0 p-0">
+<body class="flex flex-col min-h-screen">
 
     {{-- ===== Navbar Responsif ===== --}}
     <div id="navbar" class="fixed top-0 left-0 w-full z-50 bg-[#FF7B00] shadow-md transition-transform duration-300">
@@ -25,7 +25,7 @@
 
             <!-- LOGO -->
             <a href="/">
-                <img src="{{ asset('images/logo.webp') }}" alt="Geprek GT" class="h-14 w-auto">
+                <img src="{{ asset('images/logoNew.png') }}" alt="Geprek GT" class="h-14 w-auto">
             </a>
 
             <!-- HAMBURGER BUTTON (MOBILE) -->
@@ -73,9 +73,9 @@
 
 
     {{-- ===== Main Content ===== --}}
-    <main class="relative bg-fixed bg-cover bg-center min-h-screen"
-        style="background-image: url('{{ asset('images/bg-hero.webp') }}');">
-        @yield('content')
+    <main class="flex-grow relative bg-fixed bg-cover bg-center"
+    style="background-image: url('{{ asset('images/bg-hero.webp') }}');">
+            @yield('content')
     </main>
 
 
@@ -99,15 +99,15 @@
 
             <hr class="border-white/30 mb-6">
 
-            <div class="flex justify-center gap-5 mb-6">
-                <a href="#"><img src="{{ asset('images/icon-instagram.png') }}"
-                        class="w-6 h-6 hover:opacity-80 transition"></a>
-                <a href="#"><img src="{{ asset('images/icon-facebook.png') }}"
-                        class="w-6 h-6 hover:opacity-80 transition"></a>
-                <a href="#"><img src="{{ asset('images/icon-twitter.png') }}"
-                        class="w-6 h-6 hover:opacity-80 transition"></a>
-                <a href="#"><img src="{{ asset('images/icon-whatsapp.png') }}"
-                        class="w-6 h-6 hover:opacity-80 transition"></a>
+            <div class="flex flex-col items-center gap-4 mb-6">
+                <p class="text-sm md:text-base leading-relaxed text-white/90 max-w-2xl text-center">
+                    Hubungi Kami Lewat Whatsapp
+                </p>
+                <a href="#" class="">
+                    <img src="{{ asset('images/icon-whatsapp.png') }}" 
+                        class="w-6 h-6 hover:opacity-80 transition" 
+                        alt="WhatsApp">
+                </a>
             </div>
 
             <div class="text-xs md:text-sm text-white/90 mb-3">
@@ -126,7 +126,7 @@
 
 
 
-    {{-- ===== Script Navbar & Mobile Menu ===== --}}
+    {{-- ===== Script Navbar Mobile Menu, Modal Delete ===== --}}
     <script>
         // Hide navbar on scroll down, show on scroll up
         let lastScrollTop = 0;
@@ -152,6 +152,22 @@
         btn.addEventListener('click', () => {
             menu.classList.toggle('hidden');
         });
+
+        // Modal Delete
+        function openDeleteModal(id, name) {
+            document.getElementById('productName').innerText = name;
+            document.getElementById('deleteForm').action = '/menu/' + id;
+            document.getElementById('deleteModal').classList.remove('hidden');
+        }
+
+        function closeDeleteModal() {
+            document.getElementById('deleteModal').classList.add('hidden');
+        }
+
+        document.getElementById('deleteModal').addEventListener('click', function(e) {
+            if (e.target === this) closeDeleteModal();
+        });
+
     </script>
 
 </body>

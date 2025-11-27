@@ -55,8 +55,7 @@
                     @forelse ($products as $product)
                         @if ($product->promo == 1)
                             <div
-                                class="bg-gray-50 rounded-2xl shadow-md overflow-hidden hover:shadow-lg
-                                transition duration-300 flex flex-col h-full scroll-animate">
+                                class="bg-white text-[#1E1E2F] rounded-2xl shadow-lg overflow-hidden hover:scale-[1.05] transition-transform duration-300">
 
                                 {{-- GAMBAR RESPONSIF (ANTI GEPENG) --}}
                                 <a href="/products/{{ $product->id }}">
@@ -122,8 +121,7 @@
 
                                 @foreach ($categoryProducts as $product)
                                     <div
-                                        class="bg-gray-50 rounded-2xl shadow-md overflow-hidden hover:shadow-lg
-                                        transition duration-300 flex flex-col h-full scroll-animate">
+                                        class="bg-white text-[#1E1E2F] rounded-2xl shadow-lg overflow-hidden hover:scale-[1.05] transition-transform duration-300">
 
                                         {{-- GAMBAR RESPONSIF --}}
                                         <a href="/products/{{ $product->id }}">

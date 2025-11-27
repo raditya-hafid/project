@@ -8,13 +8,13 @@
         class="text-white text-center flex flex-col items-center justify-center min-h-screen">
 
         <div class="relative z-10">
-            <img src="{{ asset('images/logo.png') }}" alt="Logo" class="mx-auto w-40 mb-6">
+            <img src="{{ asset('images/logoNew.png') }}" alt="Logo" class="mx-auto w-40 mb-6">
             <h1 class="text-5xl font-extrabold tracking-wide mb-2 drop-shadow-lg">GEPREK GT</h1>
             <p class="text-xl mb-10 uppercase drop-shadow-md">AYAM GEPREK RESEP PAK GT</p>
             <div class="flex justify-center gap-5">
                 <a href="#order"
                     class="bg-[#FF7B00] text-white px-8 py-3 rounded-lg font-semibold hover:bg-[#e46c00] transition-all shadow-lg">
-                    Order Now
+                    Pre Order Now
                 </a>
                 <a href="#menu"
                     class="bg-white text-[#1E1E2F] px-8 py-3 rounded-lg font-semibold hover:bg-gray-200 transition-all shadow-lg">
@@ -50,31 +50,44 @@
             </h2>
 
             <div class="grid md:grid-cols-2 gap-10">
-                {{-- Menu Card 1 --}}
-                <div
-                    class="bg-white text-[#1E1E2F] rounded-2xl shadow-lg overflow-hidden hover:scale-[1.02] transition-transform duration-300">
-                    <img src="{{ asset('images/menu1.jpg') }}" alt="Ayam Geprek Besar"
-                        class="w-full h-60 object-cover">
-                    <div class="bg-[#5C0000] text-white text-lg font-semibold py-2">Top Menu 1</div>
-                    <div class="p-5">
-                        <h3 class="text-xl font-bold text-[#5C0000] mb-2">Ayam Geprek Besar</h3>
-                        <a href="#" class="text-[#FF7B00] font-medium hover:underline">Pesan Sekarang</a>
-                        <p class="text-gray-500 text-sm mt-1">(Yapping)</p>
-                    </div>
-                </div>
+                {{-- Menu Card --}}
+                @forelse ($hotPromos as $promo)
+                    <div class="bg-white text-[#1E1E2F] rounded-2xl shadow-lg overflow-hidden hover:scale-[1.05] transition-transform duration-300">
+                        {{-- GAMBAR --}}
+                        @if ($promo->gambar)
+                            <a href="/products/{{ $promo->id }}">
+                                <img src="{{ asset('storage/' . $promo->gambar) }}" 
+                                    alt="{{ $promo->name }}" 
+                                    class="w-full h-60 object-cover">
+                            </a>
+                        @else
+                            <div class="w-full h-60 bg-gray-300 flex items-center justify-center text-gray-600">
+                                No Image
+                            </div>
+                        @endif
 
-                {{-- Menu Card 2 --}}
-                <div
-                    class="bg-white text-[#1E1E2F] rounded-2xl shadow-lg overflow-hidden hover:scale-[1.02] transition-transform duration-300">
-                    <img src="{{ asset('images/menu1.jpg') }}" alt="Ayam Geprek Kecil"
-                        class="w-full h-60 object-cover">
-                    <div class="bg-[#5C0000] text-white text-lg font-semibold py-2">Top Menu 2</div>
-                    <div class="p-5">
-                        <h3 class="text-xl font-bold text-[#5C0000] mb-2">Ayam Geprek Kecil</h3>
-                        <a href="#" class="text-[#FF7B00] font-medium hover:underline">Pesan Sekarang</a>
-                        <p class="text-gray-500 text-sm mt-1">(Yapping)</p>
+                        {{-- LABEL CARD --}}
+                        <div class="bg-red-600 text-white text-lg font-semibold py-2 uppercase">
+                            Hot Promo
+                        </div>
+
+                        {{-- ISI CARD --}}
+                        <div class="p-5">
+                            <h3 class="text-xl font-bold text-[#5C0000] mb-2">{{ $promo->name }}</h3>
+                            <a href="/products/{{ $promo->id }}" 
+                                class="text-[#FF7B00] font-medium hover:underline">
+                                Pesan Dahulu Sekarang
+                            </a>
+                            <p class="text-gray-500 text-sm mt-1">
+                                Rp{{ number_format($promo->price, 0, ',', '.') }}
+                            </p>
+                        </div>
                     </div>
-                </div>
+
+                    @empty
+                        <p class="text-white text-center col-span-2">Belum ada Hot Promo tersedia.</p>
+                @endforelse
+
             </div>
         </div>
 
