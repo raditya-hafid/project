@@ -100,10 +100,14 @@
             <hr class="border-white/30 mb-6">
 
             <div class="flex justify-center gap-5 mb-6">
-                <a href="#"><img src="{{ asset('images/icon-instagram.png') }}" class="w-6 h-6 hover:opacity-80 transition"></a>
-                <a href="#"><img src="{{ asset('images/icon-facebook.png') }}" class="w-6 h-6 hover:opacity-80 transition"></a>
-                <a href="#"><img src="{{ asset('images/icon-twitter.png') }}" class="w-6 h-6 hover:opacity-80 transition"></a>
-                <a href="#"><img src="{{ asset('images/icon-whatsapp.png') }}" class="w-6 h-6 hover:opacity-80 transition"></a>
+                <a href="#"><img src="{{ asset('images/icon-instagram.png') }}"
+                        class="w-6 h-6 hover:opacity-80 transition"></a>
+                <a href="#"><img src="{{ asset('images/icon-facebook.png') }}"
+                        class="w-6 h-6 hover:opacity-80 transition"></a>
+                <a href="#"><img src="{{ asset('images/icon-twitter.png') }}"
+                        class="w-6 h-6 hover:opacity-80 transition"></a>
+                <a href="#"><img src="{{ asset('images/icon-whatsapp.png') }}"
+                        class="w-6 h-6 hover:opacity-80 transition"></a>
             </div>
 
             <div class="text-xs md:text-sm text-white/90 mb-3">
