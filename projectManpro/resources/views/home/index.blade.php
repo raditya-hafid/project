@@ -49,7 +49,7 @@
                 <span class="w-20 h-[1px] bg-white"></span>
             </h2>
 
-            <div class="grid md:grid-cols-2 gap-10">
+            <div class="grid grid-cols-2 gap-6 sm:gap-8 px-2 sm:px-0">
                 {{-- Menu Card --}}
                 @forelse ($hotPromos as $promo)
                     <div class="bg-white text-[#1E1E2F] rounded-2xl shadow-lg overflow-hidden hover:scale-[1.05] transition-transform duration-300">

@@ -33,7 +33,7 @@
         <div class="max-w-6xl mx-auto px-6">
             <h3 class="text-2xl font-bold mb-8">Your Latest Dishes</h3>
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-8">
+            <div class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 md:gap-8">
                 @forelse ($menus as $menu)
                     {{-- @if ($menu->id_category == 1)
 
@@ -102,7 +102,7 @@
                         class="bg-[#45000F] text-white rounded-3xl p-8 max-w-md w-full text-center shadow-2xl border border-white/20">
 
                         <h3 class="text-xl font-semibold mb-6">
-                            Apakah Anda Yakin Ingin Menghapus Menu <span id="productName" class="font-bold"></span>?
+                            Apakah Anda Yakin Ingin Menghapus Menu <span id="productName" class="font-bold text-[#FF7B00]"></span>?
                         </h3>
 
                         <form id="deleteForm" method="POST">

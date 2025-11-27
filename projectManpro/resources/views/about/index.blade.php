@@ -4,7 +4,8 @@
 
 @section('content')
     <section class="min-h-screen flex items-center justify-center text-white bg-no-repeat bg-center"
-        style="background-image: url('{{ asset('images/logoNew.png') }}');">
+        style="background-image: url('{{ asset('images/logoNew.png') }}');
+                background-size: 600px;">
         {{-- Overlay gelap transparan agar teks lebih kontras --}}
         <div class="absolute inset-0 bg-[#5C0000]/80"></div>
 
