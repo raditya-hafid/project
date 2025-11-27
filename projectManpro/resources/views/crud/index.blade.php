@@ -41,8 +41,8 @@
                     <div class="bg-white text-gray-800 rounded-xl shadow-lg overflow-hidden">
                         @if ($menu->gambar)
                             <div class="w-full aspect-[7/5] overflow-hidden rounded-xl">
-                                <img src="{{ asset('storage/' . $menu->gambar) }}" alt="{{ $menu->name }}"
-                                    class="w-full h-full object-cover">
+                                <a href="/menu/{{ $menu->id }}"><img src="{{ asset('storage/' . $menu->gambar) }}"
+                                        alt="{{ $menu->name }}" class="w-full h-full object-cover"></a>
                             </div>
                         @else
                             <div
