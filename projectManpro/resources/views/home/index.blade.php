@@ -8,7 +8,7 @@
         class="text-white text-center flex flex-col items-center justify-center min-h-screen">
 
         <div class="relative z-10">
-            <img src="{{ asset('images/logoNew.png') }}" alt="Logo" class="mx-auto w-40 mb-6">
+            <img src="{{ asset('images/logoNew.webp') }}" alt="Logo" class="mx-auto w-40 mb-6">
             <h1 class="text-5xl font-extrabold tracking-wide mb-2 drop-shadow-lg">GEPREK GT</h1>
             <p class="text-xl mb-10 uppercase drop-shadow-md">AYAM GEPREK RESEP PAK GT</p>
             <div class="flex justify-center gap-5">
@@ -56,8 +56,8 @@
                         {{-- GAMBAR --}}
                         @if ($promo->gambar)
                             <a href="/products/{{ $promo->id }}">
-                                <img src="{{ asset('storage/' . $promo->gambar) }}" 
-                                    alt="{{ $promo->name }}" 
+                                <img src="{{ asset('storage/' . $promo->gambar) }}"
+                                    alt="{{ $promo->name }}"
                                     class="w-full h-60 object-cover">
                             </a>
                         @else
@@ -74,7 +74,7 @@
                         {{-- ISI CARD --}}
                         <div class="p-5">
                             <h3 class="text-xl font-bold text-[#5C0000] mb-2">{{ $promo->name }}</h3>
-                            <a href="/products/{{ $promo->id }}" 
+                            <a href="/products/{{ $promo->id }}"
                                 class="text-[#FF7B00] font-medium hover:underline">
                                 Pesan Dahulu Sekarang
                             </a>

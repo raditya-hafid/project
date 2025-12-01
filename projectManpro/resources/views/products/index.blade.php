@@ -6,7 +6,7 @@
 
         {{-- ================= HERO SECTION ================= --}}
         <div class="bg-cover bg-center min-h-[500px] flex items-center pt-32 md:pt-40"
-            style="background-image: url('{{ asset('images/Rectangle.png') }}')">
+            style="background-image: url('{{ asset('images/Rectangle.webp') }}')">
             <div
                 class="container mx-auto flex flex-col-reverse md:flex-row items-center justify-between px-6 md:px-16 lg:px-30 py-10 md:py-20">
 

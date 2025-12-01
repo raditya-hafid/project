@@ -9,7 +9,7 @@
     <div class="absolute inset-0 flex justify-center items-center pointer-events-none">
         <div class="bg-center bg-no-repeat"
             style="
-                background-image: url('{{ asset('images/logoNew.png') }}');
+                background-image: url('{{ asset('images/logoNew.webp') }}');
                 background-size: 700px;
                 width: 800px;
                 height: 800px;

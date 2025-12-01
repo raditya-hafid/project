@@ -25,7 +25,7 @@
 
             <!-- LOGO -->
             <a href="/">
-                <img src="{{ asset('images/logoNew.png') }}" alt="Geprek GT" class="h-14 w-auto">
+                <img src="{{ asset('images/logoNew.webp') }}" alt="Geprek GT" class="h-14 w-auto">
             </a>
 
             <!-- HAMBURGER BUTTON (MOBILE) -->
@@ -104,8 +104,8 @@
                     Hubungi Kami Lewat Whatsapp
                 </p>
                 <a href="#" class="">
-                    <img src="{{ asset('images/icon-whatsapp.png') }}" 
-                        class="w-6 h-6 hover:opacity-80 transition" 
+                    <img src="{{ asset('images/icon-whatsapp.webp') }}"
+                        class="w-6 h-6 hover:opacity-80 transition"
                         alt="WhatsApp">
                 </a>
             </div>

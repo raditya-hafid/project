@@ -6,7 +6,7 @@
     {{-- ===== Hero Section ===== --}}
     <section
         class="relative bg-cover bg-center flex items-center justify-center min-h-[60vh] font-bold text-white"
-        style="background-image: url('{{ asset('images/otlet full.jpg') }}');">
+        style="background-image: url('{{ asset('images/otlet full.webp') }}');">
         <h1 class="relative z-10 text-4xl md:text-5xl font-extrabold tracking-wide drop-shadow-lg uppercase"
             style="font-family: 'Luckiest Guy', cursive; font-size: clamp(2.5rem, 10vw, 5rem); text-shadow: 2px 3px 3px rgba(0,0,0,0.4);">
             Lokasi
