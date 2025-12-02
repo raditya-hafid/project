@@ -8,12 +8,12 @@
         {{-- Card Utama --}}
         <div class="bg-white rounded-2xl shadow-2xl overflow-hidden max-w-5xl mx-auto mt-4">
             <div class="grid grid-cols-1 md:grid-cols-2 h-full">
-                
+
                 {{-- Gambar Menu - Full Height di Kiri --}}
                 <div class="relative md:h-full">
                     @if ($menu->gambar)
                         <div class="w-full h-64 md:h-full">
-                            <img src="{{ asset('storage/' . $menu->gambar) }}" 
+                            <img src="{{ asset('uploads/' . $menu->gambar) }}"
                                  alt="{{ $menu->name }}"
                                  class="w-full h-full object-cover">
                         </div>
@@ -57,22 +57,22 @@
                     {{-- Tombol Aksi — Rapi & Responsif --}}
                     <div class="space-y-3 md:space-y-0 md:space-x-3 flex flex-col md:flex-row">
                         <a href="{{ route('menu.edit', $menu->id) }}"
-                            class="flex-1 bg-[#FF7B00] text-white font-semibold py-3 rounded-lg 
+                            class="flex-1 bg-[#FF7B00] text-white font-semibold py-3 rounded-lg
                                 flex items-center justify-center gap-2 hover:bg-[#e86f00] transition
                                 shadow-sm hover:shadow-md">
                             ✏️ <span>Edit Menu</span>
                         </a>
 
-                        <button 
+                        <button
                             onclick="openDeleteModal('{{ $menu->id }}', '{{ $menu->name }}')"
-                            class="flex-1 bg-red-600 text-white font-semibold py-3 rounded-lg 
+                            class="flex-1 bg-red-600 text-white font-semibold py-3 rounded-lg
                                 flex items-center justify-center gap-2 hover:bg-red-700 transition
                                 shadow-sm hover:shadow-md">
                             🗑️ <span>Hapus</span>
                         </button>
 
                         <a href="{{ route('menu.index') }}"
-                            class="flex-1 bg-[#45000F] text-white font-semibold py-3 rounded-lg 
+                            class="flex-1 bg-[#45000F] text-white font-semibold py-3 rounded-lg
                                 flex items-center justify-center gap-2 hover:bg-[#30000A] transition
                                 shadow-sm hover:shadow-md">
                             ← <span>Kembali</span>

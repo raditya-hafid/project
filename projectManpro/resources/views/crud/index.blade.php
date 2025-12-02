@@ -41,7 +41,7 @@
                     <div class="bg-white text-[#1E1E2F] rounded-2xl shadow-lg overflow-hidden hover:scale-[1.05] transition-transform duration-300">
                         @if ($menu->gambar)
                             <div class="w-full aspect-[7/5] overflow-hidden rounded-xl">
-                                <a href="/menu/{{ $menu->id }}"><img src="{{ asset('storage/' . $menu->gambar) }}"
+                                <a href="/menu/{{ $menu->id }}"><img src="{{ asset('uploads/' . $menu->gambar) }}"
                                         alt="{{ $menu->name }}" class="w-full h-full object-cover"></a>
                             </div>
                         @else
@@ -97,7 +97,7 @@
                 <!-- Delete Confirmation Modal -->
                 <div id="deleteModal"
                     class="fixed inset-0 bg-black/60 flex items-center justify-center hidden z-50">
-                    
+
                     <div
                         class="bg-[#45000F] text-white rounded-3xl p-8 max-w-md w-full text-center shadow-2xl border border-white/20">
 

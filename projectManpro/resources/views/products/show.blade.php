@@ -16,9 +16,9 @@
 
                 @if ($product->gambar)
                     <div class="w-full aspect-[7/5] overflow-hidden">
-                        <img src="{{ asset('storage/' . $product->gambar) }}"
+                        <img src="{{ asset('uploads/' . $product->gambar) }}"
                              alt="{{ $product->name }}"
-                             class="w-full h-full object-cover">
+                             class="w-full h-full object-cover" loading="lazy">
                     </div>
                 @else
                     <div class="w-full aspect-[7/5] bg-gray-200 flex items-center justify-center text-gray-400">

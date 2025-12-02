@@ -22,23 +22,20 @@
                     </h1>
                     <p class="mt-4 text-white leading-relaxed text-sm sm:text-base md:text-lg"
                         style="font-family: 'Montserrat', sans-serif;">
-                        Dibuat dari ayam segar pilihan dan sambal dadak yang diracik setiap hari. <br
-                            class="hidden md:block">
+                        Dibuat dari ayam segar pilihan dan sambal dadak yang diracik setiap hari. <br class="hidden md:block">
                         Rasakan bedanya!
                     </p>
                 </div>
 
-                {{-- GAMBAR HERO (ANIMASI PUTAR) --}}
+                {{-- GAMBAR HERO --}}
                 <div class="w-full md:w-1/2 flex justify-center mb-6 md:mb-0 pl-0 md:pl-10 lg:pl-40">
                     <img src="{{ asset('images/Geprek.webp') }}" alt="Geprek GT"
-                        class="w-auto max-w-50 sm:max-w-58 md:max-w-66 lg:max-w-74 xl:max-w-82 animate-spin-slow">
+                        class="w-auto max-w-50 sm:max-w-58 md:max-w-66 lg:max-w-74 xl:max-w-82 animate-spin-slow" loading="lazy">
                 </div>
             </div>
         </div>
 
-        {{-- ========================================================= --}}
-        {{-- ==================== CONTAINER UTAMA ==================== --}}
-        {{-- ========================================================= --}}
+        {{-- MAIN CONTAINER --}}
         <div class="container mx-auto py-8 px-4 sm:px-6 md:px-10 lg:px-20">
 
             {{-- ================= HOT PROMO ================= --}}
@@ -57,18 +54,17 @@
                             <div
                                 class="bg-white text-[#1E1E2F] rounded-2xl shadow-lg overflow-hidden hover:scale-[1.05] transition-transform duration-300">
 
-                                {{-- GAMBAR RESPONSIF (ANTI GEPENG) --}}
+                                {{-- GAMBAR RESPONSIF --}}
                                 <a href="/products/{{ $product->id }}">
                                     <div class="w-full aspect-[4/3] sm:aspect-[7/5] rounded-xl overflow-hidden">
-                                        <img src="{{ asset('storage/' . $product->gambar) }}" alt="{{ $product->name }}"
-                                            class="w-full h-full object-cover">
+                                        <img src="{{ asset('uploads/' . $product->gambar) }}"
+                                            alt="{{ $product->name }}" class="w-full h-full object-cover" loading="lazy">
                                     </div>
                                 </a>
 
                                 {{-- ISI CARD --}}
                                 <div class="p-3 sm:p-4 flex flex-col gap-2 flex-grow">
 
-                                    {{-- Nama & Rating --}}
                                     <div class="flex justify-between items-start gap-1">
                                         <h4 class="font-bold text-gray-900 text-sm sm:text-base leading-tight line-clamp-2">
                                             {{ $product->name }}
@@ -78,7 +74,6 @@
                                         </div>
                                     </div>
 
-                                    {{-- Harga & Tombol --}}
                                     <div class="flex justify-between items-center mt-auto">
                                         <p class="text-gray-800 font-bold text-sm sm:text-lg">
                                             Rp{{ number_format($product->price, 0, ',', '.') }}
@@ -123,15 +118,14 @@
                                     <div
                                         class="bg-white text-[#1E1E2F] rounded-2xl shadow-lg overflow-hidden hover:scale-[1.05] transition-transform duration-300">
 
-                                        {{-- GAMBAR RESPONSIF --}}
+                                        {{-- GAMBAR --}}
                                         <a href="/products/{{ $product->id }}">
                                             <div class="w-full aspect-[4/3] sm:aspect-[7/5] rounded-xl overflow-hidden">
-                                                <img src="{{ asset('storage/' . $product->gambar) }}"
-                                                    alt="{{ $product->name }}" class="w-full h-full object-cover">
+                                                <img src="{{ asset('uploads/' . $product->gambar) }}"
+                                                    alt="{{ $product->name }}" class="w-full h-full object-cover" loading="lazy">
                                             </div>
                                         </a>
 
-                                        {{-- ISI CARD --}}
                                         <div class="p-3 sm:p-4 flex flex-col flex-grow">
                                             <div class="flex justify-between items-start mb-1 sm:mb-2 gap-1">
                                                 <h4
@@ -172,7 +166,6 @@
             <div class="mt-20 mb-10">
                 <div class="flex flex-col md:flex-row items-center justify-between gap-8">
 
-                    {{-- TEKS --}}
                     <div class="w-full md:w-1/2 scroll-animate">
                         <h2 class="font-bold text-white text-2xl sm:text-3xl md:text-4xl leading-tight"
                             style="font-family: 'Montserrat', sans-serif;">
@@ -180,10 +173,9 @@
                         </h2>
                     </div>
 
-                    {{-- GAMBAR --}}
                     <div class="w-full md:w-1/2 flex justify-center md:justify-end scroll-animate">
                         <img src="{{ asset('images/Komen.webp') }}" alt="Apa Kata Pelanggan"
-                            class="w-full max-w-md h-auto object-contain hover:scale-105 transition duration-300">
+                            class="w-full max-w-md h-auto object-contain hover:scale-105 transition duration-300" loading="lazy">
                     </div>
 
                 </div>
@@ -192,13 +184,12 @@
         </div>
     </div>
 
-    {{-- ================= ANIMASI CUSTOM ================= --}}
+    {{-- ANIMASI --}}
     <style>
         @keyframes spin-slow {
             0% {
                 transform: rotate(0deg);
             }
-
             100% {
                 transform: rotate(360deg);
             }
@@ -222,7 +213,6 @@
 
     <script>
         document.addEventListener("DOMContentLoaded", function() {
-
             if ('IntersectionObserver' in window) {
 
                 let observer = new IntersectionObserver((entries, observer) => {

@@ -17,7 +17,7 @@
     <section class="relative bg-cover bg-center min-h-screen flex items-center justify-center"
         style="background-image: url('{{ asset('images/bg-hero.webp') }}');">
 
-        <!-- LOGO BESAR DI TENGAH (TIDAK TRANSPARAN) -->
+        <!-- LOGO -->
         <div class="absolute inset-0 flex justify-center items-center pointer-events-none">
             <div class="bg-center bg-no-repeat"
                 style="
@@ -29,7 +29,7 @@
             </div>
         </div>
 
-        <!-- CARD FORM -->
+        <!-- CARD -->
         <div
             class="relative z-10 bg-[#FFFFFF]/20 backdrop-blur-md text-white p-10 rounded-2xl shadow-2xl w-full max-w-md border border-gray-700">
 
@@ -42,11 +42,9 @@
 
                 <!-- Nama -->
                 <div>
-                    <label for="name" class="block font-semibold drop-shadow-[2px_2px_0_#000] mb-1">Nama
-                        Menu</label>
+                    <label class="block font-semibold drop-shadow-[2px_2px_0_#000] mb-1">Nama Menu</label>
                     <input type="text" id="name" name="name" value="{{ old('name', $menu->name) }}"
-                        class="w-full rounded-full p-2 text-gray-900 focus:ring-2 focus:ring-[#FF7B00] outline-none"
-                        required>
+                        class="w-full rounded-full p-2 text-gray-900 focus:ring-2 focus:ring-[#FF7B00] outline-none" required>
                 </div>
 
                 <!-- Kategori -->
@@ -69,18 +67,16 @@
 
                 <!-- Deskripsi -->
                 <div>
-                    <label for="description"
-                        class="block font-semibold drop-shadow-[2px_2px_0_#000] mb-1">Deskripsi</label>
+                    <label class="block font-semibold drop-shadow-[2px_2px_0_#000] mb-1">Deskripsi</label>
                     <textarea id="description" name="description" rows="3"
                         class="w-full rounded-lg p-2 text-gray-900 focus:ring-2 focus:ring-[#FF7B00] outline-none">{{ old('description', $menu->description) }}</textarea>
                 </div>
 
                 <!-- Harga -->
                 <div>
-                    <label for="price" class="block font-semibold drop-shadow-[2px_2px_0_#000] mb-1">Harga</label>
+                    <label class="block font-semibold drop-shadow-[2px_2px_0_#000] mb-1">Harga</label>
                     <input type="number" id="price" name="price" value="{{ old('price', $menu->price) }}"
-                        class="w-full rounded-full p-2 text-gray-900 focus:ring-2 focus:ring-[#FF7B00] outline-none"
-                        required>
+                        class="w-full rounded-full p-2 text-gray-900 focus:ring-2 focus:ring-[#FF7B00] outline-none" required>
                 </div>
 
                 <!-- Promo -->
@@ -99,27 +95,32 @@
                     @if ($menu->gambar)
                         <div class="mb-3">
                             <p class="text-sm mb-1">Gambar Saat Ini:</p>
-                            <img src="{{ asset('storage/' . $menu->gambar) }}"
+
+                            {{-- 🔥 SUDAH BENAR: karena DB = "menus/xxxx.png" --}}
+                            <img src="{{ asset('uploads/' . $menu->gambar) }}"
                                 class="w-32 h-32 object-cover rounded-lg shadow">
                         </div>
                     @endif
 
                     <input type="file" id="gambar" accept="image/*"
-                        class="w-full text-gray-900 file:rounded-lg file:border-none file:px-3 file:py-2 file:bg-[#FF7B00] file:text-white file:font-medium file:cursor-pointer hover:file:bg-[#e46c00] transition">
+                        class="w-full text-gray-900 file:rounded-lg file:border-none file:px-3 file:py-2 file:bg-[#FF7B00] file:text-white hover:file:bg-[#e46c00] transition">
 
+                    {{-- 🔥 untuk base64 hasil crop --}}
                     <input type="hidden" name="cropped_image" id="cropped_image">
 
                     <div class="mt-3">
-                        <img id="preview" class="hidden w-full aspect-[7/5] object-cover rounded-lg shadow-lg" alt="Preview Gambar">
+                        <img id="preview" class="hidden w-full aspect-[7/5] object-cover rounded-lg shadow-lg"
+                            alt="Preview">
                     </div>
                 </div>
 
-                <!-- Tombol -->
+                <!-- Aksi -->
                 <div class="flex justify-between mt-8">
                     <a href="{{ route('menu.index') }}"
                         class="bg-[#1E1E3A] hover:bg-[#16162e] text-white font-semibold px-6 py-2 rounded-lg transition">
                         Kembali
                     </a>
+
                     <button type="submit"
                         class="bg-[#FF7B00] hover:bg-[#e46c00] text-white font-semibold px-6 py-2 rounded-lg transition">
                         Simpan Perubahan
@@ -130,13 +131,15 @@
 
     </section>
 
-    <!-- MODAL CROP -->
+    <!-- MODAL CROPPER -->
     <div id="cropModal" class="fixed inset-0 bg-black/70 flex items-center justify-center hidden z-50">
         <div class="bg-white p-5 rounded-xl text-gray-900 w-[90%] max-w-lg">
             <h3 class="text-lg font-semibold mb-3">Potong Gambar</h3>
+
             <div class="w-full overflow-hidden">
                 <img id="cropImage" class="max-h-[400px] w-full object-contain" />
             </div>
+
             <div class="flex justify-end mt-4 space-x-3">
                 <button id="cancelCrop" class="px-4 py-2 bg-gray-400 text-white rounded-lg">Batal</button>
                 <button id="confirmCrop" class="px-4 py-2 bg-[#FF7B00] text-white rounded-lg">Simpan</button>
@@ -144,14 +147,17 @@
         </div>
     </div>
 
+    <!-- SCRIPT -->
     <script>
         let cropper;
+
         const input = document.getElementById('gambar');
         const preview = document.getElementById('preview');
         const modal = document.getElementById('cropModal');
         const cropImage = document.getElementById('cropImage');
         const croppedInput = document.getElementById('cropped_image');
 
+        // Ketika gambar diganti
         input.addEventListener('change', (e) => {
             const file = e.target.files[0];
             if (!file) return;
@@ -164,7 +170,7 @@
                 if (cropper) cropper.destroy();
 
                 cropper = new Cropper(cropImage, {
-                    aspectRatio: 7 / 5, // 🔥 RASIO PERSEGI PANJANG
+                    aspectRatio: 7 / 5,
                     viewMode: 1,
                     movable: true,
                     zoomable: true,
@@ -176,15 +182,17 @@
             reader.readAsDataURL(file);
         });
 
+        // Tombol batal
         document.getElementById('cancelCrop').addEventListener('click', () => {
             modal.classList.add('hidden');
             input.value = '';
             if (cropper) cropper.destroy();
         });
 
+        // Tombol simpan
         document.getElementById('confirmCrop').addEventListener('click', () => {
             const canvas = cropper.getCroppedCanvas({
-                width: 840, // 🔥 Harus mengikuti aspect ratio
+                width: 840,
                 height: 600,
             });
 
@@ -202,7 +210,6 @@
             cropper.destroy();
         });
     </script>
-
 
 </body>
 

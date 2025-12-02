@@ -7,7 +7,7 @@
     <title>Tambah Menu - Geprek GT</title>
     <script src="https://cdn.tailwindcss.com"></script>
 
-    <!-- Tambahkan Cropper.js -->
+    <!-- Cropper.js -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.css" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.js"></script>
 </head>
@@ -17,15 +17,15 @@
     <section class="relative bg-cover bg-center min-h-screen flex items-center justify-center"
         style="background-image: url('{{ asset('images/bg-hero.webp') }}');">
 
-        <!-- LOGO BARU -->
+        <!-- Foto logo -->
         <div class="absolute inset-0 flex justify-center items-center pointer-events-none">
             <div class="bg-center bg-no-repeat"
                 style="
-            background-image: url('{{ asset('images/logo.webp') }}');
-            background-size: 800px;
-            width: 800px;
-            height: 800px;
-        ">
+                    background-image: url('{{ asset('images/logo.webp') }}');
+                    background-size: 800px;
+                    width: 800px;
+                    height: 800px;
+                ">
             </div>
         </div>
 
@@ -39,38 +39,33 @@
                 class="space-y-5">
                 @csrf
 
+                {{-- NAMA MENU --}}
                 <div>
-                    <label for="name" class="block font-semibold drop-shadow-[2px_2px_0_#000] mb-1">Nama
-                        Menu</label>
+                    <label for="name" class="block font-semibold drop-shadow-[2px_2px_0_#000] mb-1">Nama Menu</label>
                     <input type="text" id="name" name="name"
                         class="w-full rounded-full p-2 text-gray-900 focus:ring-2 focus:ring-[#FF7B00] outline-none"
                         required>
                 </div>
 
+                {{-- KATEGORI --}}
                 <div>
-                    <label for="category_id" class="block font-semibold drop-shadow-[2px_2px_0_#000] mb-1">Kategori
-                        Menu</label>
+                    <label for="id_category" class="block font-semibold drop-shadow-[2px_2px_0_#000] mb-1">Kategori Menu</label>
 
-                    <div class="text-gray-900">
-                        <select id="id_category" name="id_category"
-                            class="w-full rounded-full p-2 text-gray-900 focus:ring-2 focus:ring-[#FF7B00] outline-none"
-                            required>
+                    <select id="id_category" name="id_category"
+                        class="w-full rounded-full p-2 text-gray-900 focus:ring-2 focus:ring-[#FF7B00] outline-none"
+                        required>
 
-                            <option value="" disabled selected>-- Pilih Kategori --</option>
+                        <option value="" disabled selected>-- Pilih Kategori --</option>
 
-                            @foreach ($categories as $category)
-                                <option value="{{ $category->id }}" class="text-gray-900"
-                                    {{ old('id_category') == $category->id ? 'selected' : '' }}>
-                                    {{ $category->name_kategori }}
-                                </option>
-                            @endforeach
-                        </select>
-                    </div>
-                    @error('id_category')
-                        <span class="text-red-300 text-sm drop-shadow-[1px_1px_0_#000]">{{ $message }}</span>
-                    @enderror
+                        @foreach ($categories as $category)
+                            <option value="{{ $category->id }}" class="text-gray-900">
+                                {{ $category->name_kategori }}
+                            </option>
+                        @endforeach
+                    </select>
                 </div>
 
+                {{-- DESKRIPSI --}}
                 <div>
                     <label for="description"
                         class="block font-semibold drop-shadow-[2px_2px_0_#000] mb-1">Deskripsi</label>
@@ -78,6 +73,7 @@
                         class="w-full rounded-lg p-2 text-gray-900 focus:ring-2 focus:ring-[#FF7B00] outline-none"></textarea>
                 </div>
 
+                {{-- HARGA --}}
                 <div>
                     <label for="price" class="block font-semibold drop-shadow-[2px_2px_0_#000] mb-1">Harga</label>
                     <input type="number" id="price" name="price"
@@ -85,28 +81,30 @@
                         required>
                 </div>
 
+                {{-- PROMO --}}
                 <div class="flex items-center gap-2">
                     <input type="hidden" name="promo" value="0">
                     <input type="checkbox" id="promo" name="promo" value="1"
-                        class="h-5 w-5 text-[#FF7B00] border-gray-300 rounded focus:ring-[#FF7B00]"
-                        {{ old('promo') ? 'checked' : '' }}>
+                        class="h-5 w-5 text-[#FF7B00] border-gray-300 rounded focus:ring-[#FF7B00]">
                     <label for="promo" class="font-semibold drop-shadow-[2px_2px_0_#000]">Sedang Promo?</label>
                 </div>
 
-                <!-- Gambar dengan Cropper -->
+                {{-- GAMBAR --}}
                 <div>
-                    <label for="gambar" class="block font-semibold drop-shadow-[2px_2px_0_#000] mb-1">Gambar
-                        Menu</label>
+                    <label class="block font-semibold drop-shadow-[2px_2px_0_#000] mb-1">Gambar Menu</label>
+
                     <input type="file" id="gambar" accept="image/*"
                         class="w-full text-gray-900 file:rounded-lg file:border-none file:px-3 file:py-2 file:bg-[#FF7B00] file:text-white file:font-medium file:cursor-pointer hover:file:bg-[#e46c00] transition">
+
+                    <!-- HIDDEN INPUT UNTUK BASE64 -->
                     <input type="hidden" name="gambar" id="croppedImageInput">
 
-                    <!-- Preview -->
                     <div class="mt-3">
-                        <img id="preview" class="hidden w-full rounded-lg shadow-lg" alt="Preview Gambar">
+                        <img id="preview" class="hidden w-full rounded-lg shadow-lg">
                     </div>
                 </div>
 
+                {{-- BUTTON --}}
                 <div class="flex justify-between mt-8">
                     <a href="/menu"
                         class="bg-[#1E1E3A] hover:bg-[#16162e] text-white font-semibold px-6 py-2 rounded-lg transition">
@@ -121,13 +119,15 @@
         </div>
     </section>
 
-    <!-- Modal Crop -->
+    <!-- MODAL CROP -->
     <div id="cropModal" class="fixed inset-0 bg-black/70 flex items-center justify-center hidden z-50">
         <div class="bg-white p-5 rounded-xl text-gray-900 w-[90%] max-w-lg">
             <h3 class="text-lg font-semibold mb-3">Potong Gambar</h3>
+
             <div class="w-full overflow-hidden">
                 <img id="cropImage" class="max-h-[400px] w-full object-contain" />
             </div>
+
             <div class="flex justify-end mt-4 space-x-3">
                 <button id="cancelCrop" class="px-4 py-2 bg-gray-400 text-white rounded-lg">Batal</button>
                 <button id="confirmCrop" class="px-4 py-2 bg-[#FF7B00] text-white rounded-lg">Simpan</button>
@@ -135,6 +135,7 @@
         </div>
     </div>
 
+    <!-- SCRIPT CROPPER -->
     <script>
         let cropper;
         const input = document.getElementById('gambar');
@@ -154,7 +155,7 @@
 
                 if (cropper) cropper.destroy();
                 cropper = new Cropper(cropImage, {
-                    aspectRatio: 7 / 5, // RASIO PERSEGI PANJANG
+                    aspectRatio: 7 / 5,
                     viewMode: 1,
                     movable: true,
                     zoomable: true,
@@ -174,13 +175,13 @@
         document.getElementById('confirmCrop').addEventListener('click', () => {
             const canvas = cropper.getCroppedCanvas({
                 width: 840,
-                height: 600, // cocok hasil ratio 7:5
+                height: 600,
             });
 
             canvas.toBlob((blob) => {
                 const reader = new FileReader();
                 reader.onloadend = () => {
-                    croppedInput.value = reader.result;
+                    croppedInput.value = reader.result; // kirim base64 ke controller
                     preview.src = reader.result;
                     preview.classList.remove('hidden');
                 };
@@ -191,7 +192,6 @@
             cropper.destroy();
         });
     </script>
-
 
 </body>
 

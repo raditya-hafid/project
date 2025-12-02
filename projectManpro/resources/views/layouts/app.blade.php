@@ -11,7 +11,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap" rel="stylesheet">
-
+    <link rel="icon" type="image/png" href="{{ asset('images/logo.webp') }}">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.css" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.js"></script>
 
@@ -25,7 +25,7 @@
 
             <!-- LOGO -->
             <a href="/">
-                <img src="{{ asset('images/logoNew.webp') }}" alt="Geprek GT" class="h-14 w-auto">
+                <img src="{{ asset('images/logoNew.webp') }}" alt="Geprek GT" class="h-14 w-auto" loading="lazy">
             </a>
 
             <!-- HAMBURGER BUTTON (MOBILE) -->
@@ -36,7 +36,7 @@
             <!-- MENU DESKTOP -->
             <nav class="hidden md:flex gap-4 text-white font-medium">
                 @auth
-                    <form action="/logout" method="post" class="inline">
+                    <form action="{{ route('logout') }}" method="post" class="inline">
                         @csrf
                         <button type="submit" class="hover:text-[#45000F] transition">Logout</button>
                     </form>
@@ -106,7 +106,7 @@
                 <a href="#" class="">
                     <img src="{{ asset('images/icon-whatsapp.webp') }}"
                         class="w-6 h-6 hover:opacity-80 transition"
-                        alt="WhatsApp">
+                        alt="WhatsApp" loading="lazy">
                 </a>
             </div>
 

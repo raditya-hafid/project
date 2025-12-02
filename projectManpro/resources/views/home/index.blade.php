@@ -56,7 +56,7 @@
                         {{-- GAMBAR --}}
                         @if ($promo->gambar)
                             <a href="/products/{{ $promo->id }}">
-                                <img src="{{ asset('storage/' . $promo->gambar) }}"
+                                <img src="{{ asset('uploads/' . $promo->gambar) }}"
                                     alt="{{ $promo->name }}"
                                     class="w-full h-60 object-cover">
                             </a>

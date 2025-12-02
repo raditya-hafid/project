@@ -2,44 +2,29 @@
 
 namespace App\Http\Controllers;
 
-// tes
-
 use App\Models\Menu;
 use App\Models\Category;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 
 class MenuController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-
     public function index()
     {
         $menus = Menu::with('user')->orderBy('created_at', 'desc')->get();
         $categories = Category::all();
-        return view('crud.index', ['menus' => $menus], compact('categories'));
+
+        return view('crud.index', compact('menus', 'categories'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        // 1. Ambil semua data kategori
         $categories = Category::all();
-
-        // 2. Kirim data kategori ke view
         return view('crud.create', compact('categories'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        // 🔹 Validasi input
+        // Validasi
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'id_category' => 'required|exists:categories,id',
@@ -49,59 +34,57 @@ class MenuController extends Controller
             'gambar' => 'nullable',
         ]);
 
-        //  Cek apakah gambar dikirim dalam bentuk base64 (hasil crop)
+        // Simpan gambar base64
         if ($request->filled('gambar')) {
+
             $imageData = $request->gambar;
 
-            // Pastikan format base64 valid
             if (preg_match('/^data:image\/(\w+);base64,/', $imageData, $type)) {
-                $image = substr($imageData, strpos($imageData, ',') + 1);
-                $type = strtolower($type[1]); // jpeg, png, gif, dll
 
-                if (!in_array($type, ['jpg', 'jpeg', 'png', 'gif'])) {
-                    return back()->withErrors(['gambar' => 'Format gambar tidak didukung.']);
+                // ambil ekstensi
+                $ext = strtolower($type[1]);
+
+                if (!in_array($ext, ['jpg', 'jpeg', 'png'])) {
+                    return back()->withErrors(['gambar' => 'Format gambar tidak valid.']);
                 }
 
-                $image = str_replace(' ', '+', $image);
-                $imageName = 'menus/' . uniqid() . '.' . $type;
+                // decode base64
+                $imageData = substr($imageData, strpos($imageData, ',') + 1);
+                $imageData = base64_decode($imageData);
 
-                // Simpan ke storage/public/menus
-                Storage::disk('public')->put($imageName, base64_decode($image));
+                // nama file
+                $fileName = uniqid() . '.' . $ext;
+                $folder = public_path('uploads/menus');
 
-                $validated['gambar'] = $imageName;
-            } else {
-                return back()->withErrors(['gambar' => 'Format base64 tidak valid.']);
+                // pastikan folder ada
+                if (!file_exists($folder)) {
+                    mkdir($folder, 0777, true);
+                }
+
+                // simpan file ke public/uploads/menus
+                file_put_contents($folder . '/' . $fileName, $imageData);
+
+                // simpan ke DB (dengan folder menus/)
+                $validated['gambar'] = 'menus/' . $fileName;
             }
         }
 
-        //  Simpan data ke database
         Menu::create($validated);
 
-        //  Redirect dengan pesan sukses
         return redirect()->route('menu.index')->with('success', 'Menu berhasil ditambahkan!');
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(Menu $menu)
     {
-        return view('crud.show', ['menu' => $menu]);
+        return view('crud.show', compact('menu'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(Menu $menu)
     {
         $categories = Category::all();
-
-        return view('crud.edit', ['menu' => $menu], compact('categories'));
+        return view('crud.edit', compact('menu', 'categories'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, Menu $menu)
     {
         $validated = $request->validate([
@@ -110,22 +93,31 @@ class MenuController extends Controller
             'description' => 'nullable|string',
             'price' => 'required|numeric|min:0',
             'promo' => 'required|boolean',
-            'cropped_image' => 'nullable|string', // base64 hasil crop
+            'cropped_image' => 'nullable|string',
         ]);
 
-        // Jika ada gambar baru hasil crop
-        if ($request->cropped_image) {
-            // Hapus gambar lama
-            if ($menu->gambar) {
-                Storage::disk('public')->delete($menu->gambar);
+        // Jika ada gambar baru
+        if ($request->filled('cropped_image')) {
+
+            // hapus gambar lama
+            if ($menu->gambar && file_exists(public_path('uploads/' . $menu->gambar))) {
+                unlink(public_path('uploads/' . $menu->gambar));
             }
 
-            // Decode base64 dan simpan file
-            $imageData = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $request->cropped_image));
-            $imageName = 'menus/' . uniqid() . '.png';
-            Storage::disk('public')->put($imageName, $imageData);
+            $imageData = $request->cropped_image;
+            $imageData = preg_replace('#^data:image/\w+;base64,#i', '', $imageData);
+            $decoded = base64_decode($imageData);
 
-            $validated['gambar'] = $imageName;
+            $fileName = uniqid() . '.png';
+            $folder = public_path('uploads/menus');
+
+            if (!file_exists($folder)) {
+                mkdir($folder, 0777, true);
+            }
+
+            file_put_contents($folder . '/' . $fileName, $decoded);
+
+            $validated['gambar'] = 'menus/' . $fileName;
         }
 
         $menu->update($validated);
@@ -133,13 +125,15 @@ class MenuController extends Controller
         return redirect()->route('menu.index')->with('success', 'Menu berhasil diperbarui!');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Menu $menu)
     {
+        // hapus file
+        if ($menu->gambar && file_exists(public_path('uploads/' . $menu->gambar))) {
+            unlink(public_path('uploads/' . $menu->gambar));
+        }
+
         $menu->delete();
 
-        return redirect('/menu')->with('Success', 'Postingan berhasil dihapus');
+        return redirect()->route('menu.index')->with('success', 'Menu berhasil dihapus!');
     }
 }
