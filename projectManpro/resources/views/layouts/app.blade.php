@@ -103,7 +103,7 @@
                 <p class="text-sm md:text-base leading-relaxed text-white/90 max-w-2xl text-center">
                     Hubungi Kami Lewat Whatsapp
                 </p>
-                <a href="#" class="">
+                <a href="https://wa.me/6282143539208?text={{ urlencode('Halo Admin Geprek GT, saya mau tanya menu atau pesan dong.') }}" class="">
                     <img src="{{ asset('images/icon-whatsapp.webp') }}"
                         class="w-6 h-6 hover:opacity-80 transition"
                         alt="WhatsApp" loading="lazy">
