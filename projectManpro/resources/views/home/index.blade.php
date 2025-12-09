@@ -10,7 +10,7 @@
             <h1 class="text-5xl font-extrabold tracking-wide mb-2 drop-shadow-lg">GEPREK GT</h1>
             <p class="text-xl mb-10 uppercase drop-shadow-md">AYAM GEPREK RESEP PAK GT</p>
             <div class="flex justify-center gap-5">
-                <a href="#order"
+                <a href="https://wa.me/6282143539208?text={{ urlencode('Halo Admin Geprek GT, saya mau tanya menu atau pesan dong.') }}"
                    class="bg-[#FF7B00] text-white px-8 py-3 rounded-lg font-semibold hover:bg-[#e46c00] transition-all shadow-lg">
                     Pre Order Now
                 </a>
@@ -73,7 +73,7 @@
                         {{-- ISI CARD --}}
                         <div class="p-5">
                             <h3 class="text-xl font-bold text-[#5C0000] mb-2">{{ $promo->name }}</h3>
-                            <a href="/products/{{ $promo->id }}" class="text-[#FF7B00] font-medium hover:underline">
+                            <a href="https://wa.me/6282143539208?text={{ urlencode('Halo Admin Geprek GT, saya mau tanya menu ' . $promo->name) }}" class="text-[#FF7B00] font-medium hover:underline">
                                 Pesan Dahulu Sekarang
                             </a>
                             <p class="text-gray-500 text-sm mt-1">

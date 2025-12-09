@@ -163,23 +163,6 @@
             </div>
 
             {{-- ================= TESTIMONIAL ================= --}}
-            <div class="mt-20 mb-10">
-                <div class="flex flex-col md:flex-row items-center justify-between gap-8">
-
-                    <div class="w-full md:w-1/2 scroll-animate">
-                        <h2 class="font-bold text-white text-2xl sm:text-3xl md:text-4xl leading-tight"
-                            style="font-family: 'Montserrat', sans-serif;">
-                            Apa Kata Pelanggan <br> Tentang Kami
-                        </h2>
-                    </div>
-
-                    <div class="w-full md:w-1/2 flex justify-center md:justify-end scroll-animate">
-                        <img src="{{ asset('images/Komen.webp') }}" alt="Apa Kata Pelanggan"
-                            class="w-full max-w-md h-auto object-contain hover:scale-105 transition duration-300" loading="lazy">
-                    </div>
-
-                </div>
-            </div>
 
         </div>
     </div>

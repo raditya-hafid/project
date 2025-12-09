@@ -11,6 +11,7 @@ class Menu extends Model
 {
     use HasFactory;
     protected $fillable = [
+        'id_user',
         'name',
         'description',
         'id_category',

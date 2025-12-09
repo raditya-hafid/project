@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Menu;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class MenuController extends Controller
 {
@@ -36,11 +37,9 @@ class MenuController extends Controller
 
         // Simpan gambar base64
         if ($request->filled('gambar')) {
-
             $imageData = $request->gambar;
 
             if (preg_match('/^data:image\/(\w+);base64,/', $imageData, $type)) {
-
                 // ambil ekstensi
                 $ext = strtolower($type[1]);
 
@@ -54,20 +53,26 @@ class MenuController extends Controller
 
                 // nama file
                 $fileName = uniqid() . '.' . $ext;
-                $folder = public_path('uploads/menus');
+                // Gunakan public_path('uploads') agar konsisten dengan view Anda sebelumnya
+                $folder = public_path('uploads');
 
                 // pastikan folder ada
                 if (!file_exists($folder)) {
                     mkdir($folder, 0777, true);
                 }
 
-                // simpan file ke public/uploads/menus
+                // simpan file
                 file_put_contents($folder . '/' . $fileName, $imageData);
 
-                // simpan ke DB (dengan folder menus/)
-                $validated['gambar'] = 'menus/' . $fileName;
+                // simpan nama file ke array data
+                $validated['gambar'] = $fileName;
             }
         }
+
+        // === TAMBAHAN DISINI ===
+        // Masukkan ID user yang sedang login ke array data
+        $validated['id_user'] = Auth::id();
+        // =======================
 
         Menu::create($validated);
 
